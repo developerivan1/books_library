@@ -1,0 +1,172 @@
+.container_host
+    display: grid
+    grid-template-columns: 60px 1fr
+    width: 100%
+    .header
+        height: 100vh
+        background: #232f3b
+        display: grid
+        grid-template-rows: 60px 1fr 120px
+        z-index: 100
+        padding: 1.5rem 0
+        animation: initialized1 .5s ease-in-out
+        .header__links
+            text-decoration: none
+            color: #dbdbdb
+            font-size: 30px
+            height: 60px
+            width: 60px
+            display: flex
+            justify-content: center
+            align-items: center
+            position: relative
+        .hover_title:hover::after
+            content: attr(data-title)
+            position: absolute
+            left: 100%
+            top: 50%
+            transform: translateX(0)
+            transform: translateY(-50%)
+            padding: 5px 20px
+            background: #535353
+            font-family: Poppins
+            font-size: 14px
+            z-index: -100
+            color: #dbdbdb
+            animation: navTitle .3s ease-in-out
+            opacity: 1
+
+            
+        .header__links1
+            text-decoration: none
+            color: #666666
+            background: transparent
+            font-size: 30px
+            height: 60px
+            width: 60px
+            display: flex
+            justify-content: center
+            align-items: center
+            position: relative
+
+        .header__links1:hover i
+            color: #dbdbdb
+            transition: .3s all ease
+        #home
+            color: #666666          
+
+        nav 
+            display: flex
+            align-items: center
+            ul
+                padding: 0
+                height: 240px
+                li 
+                    list-style: none
+    main 
+        height: 100vh
+        background: url(../../assets/Photos/literature.jpg)
+        background-position: center
+        background-size: cover
+        background-repeat: no-repeat
+        animation: initialized2 .5s ease
+        .darker_bg
+            display: grid
+            grid-template-rows: 35px 60px 1fr
+            width: 100%
+            height: 100% 
+            background-color: rgba(0, 0, 0, 0.6)
+            padding: 2.5rem
+        .top_part
+            display: flex
+            justify-content: space-between
+            h4 
+                font-size: 20px
+                color: #dbdbdb
+                letter-spacing: 2px
+            .search_btn 
+                position: relative
+            .search_btn a 
+                text-decoration: none
+                color: #dbdbdb
+                display: flex
+                justify-content: center
+                align-items: center
+                width: 35px
+                height: 35px
+                background: rgb(35, 47, 59)
+                font-size: 15px
+                &:hover
+                    background: #3f3f3f
+                    transition: .3s all ease
+            .notActive
+                position: absolute
+                background: rgba(255, 255, 255, 0.8)
+                right: 100%
+                top: 50%
+                transform: translateY(-50%)
+                height: 35px
+                border: none
+                width: 0px
+                outline: none
+                transition: .3s all ease
+            .active_search
+                border-top-left-radius: 40px
+                border-bottom-left-radius: 40px
+                width: 300px
+                padding-left: 15px
+                position: absolute
+                background: rgba(255, 255, 255, 0.8)
+                right: 100%
+                top: 50%
+                transform: translateY(-50%)
+                height: 35px
+                border: none
+                outline: none
+                transition: .3s all ease
+
+        .filter_block
+            width: 100%
+            display: flex
+            align-items: center
+            select
+                background: none
+                border: none
+                outline: none
+                font-family: Poppins
+                font-size: 16px
+                color: #dbdbdb
+                option
+                    background-color: rgb(35, 47, 59)
+                    outline: none
+                    &:hover
+                        background: #333
+            .howManyBooks
+                margin-left: 30px
+                .books_num
+                    color: #dbdbdb
+                .books_text
+                    color: #8a8989
+                    
+@keyframes navTitle
+    0%
+        transform: translateX(-100%)
+        opacity: 0
+    80%
+        opacity: 0.5
+    100%
+        transform: translateX(0)
+        transform: translateY(-50%)
+        opacity: 1
+@keyframes initialized1
+    0%
+        width: 0
+        transform: translateX(-60px)
+    100%
+        width: 60px 
+        transform: translateX(0)
+@keyframes initialized2
+    0%
+        transform: translateX(100%)
+    100%
+        transform: translateX(0)       

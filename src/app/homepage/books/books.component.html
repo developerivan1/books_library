@@ -1,0 +1,19 @@
+<div class="container_fluid">
+    <div class="row">
+        <div class="col-lg-2 col-md-4 col-sm-1 book_host" *ngFor="let book of books" [ngStyle]="{'background-image': 'url('+book.imageSrc+')'}">
+            <div class="dark_bg">
+                <div class="hover_block">
+                    <div class="hover_title">
+                        <h5>{{book.title}}</h5>
+                        <p>Number of pages: {{book.numberOfPages}} p</p>
+                        <button type="button">Read</button>
+                    </div>
+                </div>
+                <div class="hover_top_btn">
+                    <button type="button" id="edit"><i class="far fa-edit"></i></button>
+                    <button type="button" id="delete"><i class="fas fa-times"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,69 @@
+<div class="container_host">
+    <div class="header">
+        <div class="logo">
+            <a class="header__links" routerLink="/welcomepage" id="logotype" href="#">
+                <i class="fas fa-book"></i>
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li>
+                    <a class="header__links1 hover_title" routerLink="#" data-title="Search all books" href="#">
+                        <i class="fas fa-globe"></i>
+                    </a>
+                </li>
+                <li>
+                    <a class="header__links1 hover_title" routerLink="#" data-title="Statistic" href="#">
+                        <i class="fas fa-chart-line"></i>
+                    </a>
+                </li>
+                <li>
+                    <a class="header__links1 hover_title" routerLink="/authors" data-title="Authors" href="#">
+                        <i class="fas fa-user-alt"></i>
+                    </a>
+                </li>
+                <li>
+                    <a class="header__links1 hover_title" routerLink="#" data-title="Settings" href="#">
+                        <i class="fas fa-cog"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="bottom_block">
+            <div class="home_btn">
+                <a class="header__links1 hover_title"  routerLink="#" data-title="Home" id="home" href="#">
+                    <i class="fas fa-home"></i>
+                </a>
+            </div>
+            <div class="add_btn">
+                <a class="header__links hover_title"  routerLink="#" data-title="Add book" href="#" id="add">
+                        <i class="fas fa-plus-circle"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <main>
+        <div class="darker_bg">
+            <div class="top_part">
+                <h4>Books Library</h4>
+                <div class="search_btn">
+                    <input class="notActive" type="text" (input)="show($event)" [(ngModel)]="searchingStr" placeholder="Search book..." [ngClass]="{'active_search': isActiveSearchBlock}">
+                    <a href="#" [routerLink]="" (click)="activatedSearchBlock()">
+                        <i class="fas fa-search"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="filter_block">
+                <select [(ngModel)]="selectedGener" (ngModelChange)="onChange($event)" name="geners" id="geners">
+                    <option *ngFor="let g of bookService.geners">{{ g }}</option>
+                </select>
+                <div class="howManyBooks">
+                    <span class="books_num">{{ filter_for_books.length }}</span>
+                    <span class="books_text">&nbsp;books</span>
+                </div>
+            </div>
+            <!-- <router-outlet></router-outlet> -->
+            <app-books [books]="filter_for_books"></app-books>
+        </div>
+    </main>
+</div>
