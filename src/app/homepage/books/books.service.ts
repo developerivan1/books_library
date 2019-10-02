@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
+
 import { Book } from '../book';
 import { Author } from "../author";
-
 
 @Injectable()
 
 export class BooksService {
-
 
   books_array: Book[] = [
     {title: 'Harry Potter and the Prisoner of Azkaban',         numberOfPages: 450, imageSrc: '../../../assets/Photos/books_library_images/hp-2.jpg',                 gener: 'Fantasy'},
@@ -30,7 +29,6 @@ export class BooksService {
     {title: 'Stephen King Needed Things',                       numberOfPages: 140, imageSrc: '../../../assets/Photos/books_library_images/sk-musthave_things.jpg',   gener: 'Fantasy'},
     {title: 'Sabrina Jeffries Testament Passion',               numberOfPages: 140, imageSrc: '../../../assets/Photos/books_library_images/strat_po_zaveshaniu.jpg',  gener: 'Romans'},
   ];
-
 
   authors: Author[] = [
     {
@@ -104,7 +102,6 @@ export class BooksService {
     },
   ];
 
-
   geners: string[] = [
     'All books',
     'Romans',
@@ -117,8 +114,4 @@ export class BooksService {
     'Epic',
     'Novel'
   ];
-
-  constructor() {}
-
-
 }

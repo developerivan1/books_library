@@ -36,13 +36,7 @@
     background: rgba(255, 255, 255, 0.3)
     transition: .3s all ease
 
-@keyframes contBtnAnimation
-    0%
-        opacity: 0
-        margin-bottom: -100px
-    100%
-        opacity: 1
-        margin-bottom: 100px
+
 #logo
     position: absolute
     top: 70%
@@ -50,13 +44,7 @@
     transform: translate(-50%, -50%)
     animation: logoAnimation 1.5s ease-in-out 
 
-@keyframes logoAnimation 
-    0%
-        opacity: 0 
-        top: 50%
-    100% 
-        opacity: 1 
-        top: 70%
+// Media queries
     
 /* Portrait tablets and medium desktops */
 @media screen and (min-width: 992px) and (max-width: 1199px)
@@ -102,14 +90,6 @@
         transform: translate(-50%, -50%)
         animation: logoAnimation 1.5s ease-in-out 
 
-    @keyframes logoAnimation 
-        0%
-            opacity: 0 
-            top: 50%
-        100% 
-            opacity: 1 
-            top: 70%
-    
     #continue_btn
         margin-bottom: 70px
         width: 140px
@@ -126,10 +106,36 @@
         background: rgba(255, 255, 255, 0.3)
         transition: .3s all ease
 
-    @keyframes contBtnAnimation
-        0%
-            opacity: 0
-            margin-bottom: -100px
-        100%
-            opacity: 1
-            margin-bottom: 70px
+//Animations
+
+@keyframes contBtnAnimation
+    0%
+        opacity: 0
+        margin-bottom: -100px
+    100%
+        opacity: 1
+        margin-bottom: 100px
+
+@keyframes contBtnAnimation
+    0%
+        opacity: 0
+        margin-bottom: -100px
+    100%
+        opacity: 1
+        margin-bottom: 70px
+
+@keyframes logoAnimation 
+    0%
+        opacity: 0 
+        top: 50%
+    100% 
+        opacity: 1 
+        top: 70%
+
+@keyframes logoAnimation 
+    0%
+        opacity: 0 
+        top: 50%
+    100% 
+        opacity: 1 
+        top: 70%

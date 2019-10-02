@@ -1,6 +1,6 @@
 <div class="container_fluid">
     <div class="row">
-        <div class="col-lg-2 col-md-4 col-sm-1 book_host" *ngFor="let book of books" [ngStyle]="{'background-image': 'url('+book.imageSrc+')'}">
+        <div class="col-lg-2 col-md-4 col-sm-1 book_host" *ngFor="let book of filter_for_books" [ngStyle]="{'background-image': 'url('+book.imageSrc+')'}">
             <div class="dark_bg">
                 <div class="hover_block">
                     <div class="hover_title">
