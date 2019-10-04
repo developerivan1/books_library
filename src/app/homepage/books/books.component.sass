@@ -1,8 +1,6 @@
 :host
-    padding-top: 5vh
     width: 100%
-    overflow-y: auto
-    overflow-x: hidden
+    overflow: hidden
 :host::-webkit-scrollbar
     width: 15px
 :host::-webkit-scrollbar-track
@@ -22,76 +20,93 @@
     box-shadow: 0 0 7px 4px rgba(44, 44, 44, 0.7)
     overflow: hidden
     position: relative
-    .dark_bg
+    
+main 
+    height: 100vh
+    background: url(../../../assets/Photos/literature.jpg)
+    background-position: center
+    background-size: cover
+    background-repeat: no-repeat
+    animation: initialized2 .5s ease
+    .darker_bg
+        display: grid
+        grid-template-rows: 35px 60px 1fr
         width: 100%
-        height: 100%
-        background: transparent
-        position: relative
-        transition: .5s all ease
-    &:hover .hover_block
-        display: block
-    &:hover .hover_top_btn
-        display: block
-    &:hover .dark_bg
-        background: rgba(0, 0, 0, 0.5)
-    .hover_block
-        display: none
-        position: absolute
-        bottom: 0
-        left: 0
-        right: 0
-        height: 150px
-        background-color: #232f3b
-        transition: .5s all ease
-        padding: 15px
-        animation: hoverAnimation .3s ease-in-out
-        .hover_title
-            width: 100%
-            height: 100%
+        height: 100% 
+        background-color: rgba(0, 0, 0, 0.6)
+        padding: 2.5rem
+    .top_part
+        display: flex
+        justify-content: space-between
+        h4 
+            font-size: 20px
+            color: #dbdbdb
+            letter-spacing: 2px
+        .search_btn 
+            position: relative
+        .search_btn a 
+            text-decoration: none
+            color: #dbdbdb
             display: flex
-            flex-direction: column
-            justify-content: space-around
+            justify-content: center
             align-items: center
-            h5 
-                text-align: center
-                color: #dbdbdb
-                font-size: 18px
-            p
-                text-align: center
-                color: #dbdbdb
-            button
-                background: none
-                border: 1px solid #dbdbdb
-                color: #dbdbdb
-                width: 30%
-                height: 30px
-                outline: none
-
-                &:hover
-                    background: #666
-                    transition: .3s background ease
-            
-    .hover_top_btn
-        position: absolute
-        right: 10px
-        top: 10px
-        display: none
-        animation: hoverAnimationTop .3s ease-in-out
-        #edit, #delete
+            width: 35px
+            height: 35px
+            background: rgb(35, 47, 59)
+            font-size: 15px
+            &:hover
+                background: #3f3f3f
+                transition: .3s all ease
+        .notActive
+            position: absolute
+            background: rgba(255, 255, 255, 0.8)
+            right: 100%
+            top: 50%
+            transform: translateY(-50%)
+            height: 35px
+            border: none
+            width: 0px
+            outline: none
+            transition: .3s all ease
+        .active_search
+            border-top-left-radius: 40px
+            border-bottom-left-radius: 40px
+            width: 300px
+            padding-left: 15px
+            position: absolute
+            background: rgba(255, 255, 255, 0.8)
+            right: 100%
+            top: 50%
+            transform: translateY(-50%)
+            height: 35px
+            border: none
+            outline: none
+            transition: .3s all ease
+    .filter_block
+        width: 100%
+        display: flex
+        align-items: center
+        select
             background: none
             border: none
-            color: #fff
-            margin-right: 7px
             outline: none
-        #edit:hover
-            transform: scale(1.2)
-            transition: .3s transform ease
-        #delete:hover
-            transform: scale(1.2)
-            transition: .3s transform ease
-.book_host:hover .hover_block
-    opacity: 1
-
+            font-family: Poppins
+            font-size: 16px
+            color: #dbdbdb
+            option
+                background-color: rgb(35, 47, 59)
+                outline: none
+                &:hover
+                    background: #333
+        .howManyBooks
+            margin-left: 30px
+            .books_num
+                color: #dbdbdb
+            .books_text
+                color: #8a8989
+.bks_host
+    overflow-x: hidden
+    overflow-y: scroll
 // Animations
 
 @keyframes hoverAnimation

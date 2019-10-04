@@ -42,28 +42,5 @@
             </div>
         </div>
     </div>
-    <main>
-        <div class="darker_bg">
-            <div class="top_part">
-                <h4>Books Library</h4>
-                <div class="search_btn">
-                    <input class="notActive" type="text" [(ngModel)]="searchingStr" placeholder="Search book..." [ngClass]="{'active_search': isActiveSearchBlock}">
-                    <a href="#" [routerLink]="" (click)="activatedSearchBlock()">
-                        <i class="fas fa-search"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="filter_block">
-                <select [(ngModel)]="selectedGener" (ngModelChange)="onChange($event)" name="geners" id="geners">
-                    <option *ngFor="let g of bookService.geners">{{ g }}</option>
-                </select>
-                <div class="howManyBooks">
-                    <span class="books_num">21</span>
-                    <span class="books_text">&nbsp;books</span>
-                </div>
-            </div>
-            <!-- <router-outlet></router-outlet> -->
-            <app-books [books]="filter_for_books"></app-books>
-        </div>
-    </main>
+    <app-books ></app-books>
 </div>

@@ -1,44 +1,36 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 
-import { BooksService } from './books.service';
 import { Book } from "../book";
+import { BooksService } from './books.service';
+import { SearchPipe } from "../../search.pipe";
+import { FilterPipe } from "../../filter.pipe";
 
 @Component({
   selector: 'app-books',
   templateUrl: './books.component.html',
-  styleUrls: ['./books.component.sass']
+  styleUrls: ['./books.component.sass'],
 })
 
 export class BooksComponent implements OnInit {
 
-  @Input() books = [];
-  array_of_books = [];
-  filter_for_books = [];
+  isActiveSearchBlock: boolean;
+  selectedGener = this.bookService.geners[0];
+
+  @Input() term: string;
+  @Input() array_of_books = [];
 
   constructor(private bookService: BooksService) { }
 
   ngOnInit(): void {
     this.localStorageInitialize();
     this.completeArray();
-    this.filter_for_books = this.array_of_books;
+    this.isActiveSearchBlock = false;
   }
 
-  completeArray() {
-    for (let i = 0; i < localStorage.length; i++) {
-      const element = localStorage.getItem('book - ' + i);
-      this.array_of_books.push(JSON.parse(element));
-    }
+  activatedSearchBlock() {
+    this.isActiveSearchBlock = !this.isActiveSearchBlock;
   }
-
-  onChange(event) {
-    if (event === "All books") {
-      this.filter_for_books = this.array_of_books;
-    } 
-    else {
-      this.filter_for_books = this.array_of_books.filter(book => book.gener.includes(event));
-    }
-  }
-
+  
   localStorageInitialize() {
     if (localStorage.length == 0) {
       for (let i = 0; i < this.bookService.books_array.length; i++) {
@@ -48,7 +40,19 @@ export class BooksComponent implements OnInit {
     }
   }
 
-  show(event: any) {
-    // this.filter_for_books = this.array_of_books.filter(book => book.title.toLowerCase().includes(this.searchingStr));
+  completeArray() {
+    for (let i = 0; i < localStorage.length; i++) {
+      const element = localStorage.getItem('book - ' + i);
+      this.array_of_books.push(JSON.parse(element));
+    }
   }
+
+  onChangeEvent(index_of_book) {
+    this.bookService.books_array.splice(index_of_book, 1);
+    localStorage.clear();
+    this.array_of_books = [];
+    this.localStorageInitialize();
+    this.completeArray();
+  }
+
 }

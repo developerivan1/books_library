@@ -9,6 +9,9 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { BooksComponent } from './homepage/books/books.component';
 import { BooksService } from "./homepage/books/books.service";
 import { AuthorsComponent } from './homepage/authors/authors.component';
+import { BookComponent } from './homepage/books/book/book.component';
+import { SearchPipe } from './search.pipe';
+import { FilterPipe } from './filter.pipe';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,10 @@ import { AuthorsComponent } from './homepage/authors/authors.component';
     WelcomepageComponent,
     HomepageComponent,
     BooksComponent,
-    AuthorsComponent
+    AuthorsComponent,
+    BookComponent,
+    SearchPipe,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

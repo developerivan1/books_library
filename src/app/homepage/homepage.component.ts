@@ -10,18 +10,10 @@ import { Book } from "./book";
   styleUrls: ['./homepage.component.sass']
 })
 
-export class HomepageComponent implements OnInit {
-  isActiveSearchBlock: boolean;
-  selectedGener = this.bookService.geners[0];
-  @Input() searchingStr: string;
+export class HomepageComponent {
+
 
   constructor(private bookService: BooksService) { }
 
-  ngOnInit() {
-    this.isActiveSearchBlock = false;
-  }
 
-  activatedSearchBlock() {
-    this.isActiveSearchBlock = !this.isActiveSearchBlock;
-  }
 }
