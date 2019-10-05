@@ -18,9 +18,14 @@
                 <span class="books_text">&nbsp;books</span>
             </div>
         </div>
-        <div class="container_fluid">
-            <div class="row bks_host">
-                <book *ngFor="let item of array_of_books | search:term | filter:selectedGener; let i = index" [index_of_book]="i" (onChanges)="onChangeEvent($event)" [array_book]="item" [ngStyle]="{'background-image': 'url('+item.imageSrc+')'}"></book>
+        <div class="container_fluid hoster_book">
+            <div class="row">
+                <book *ngFor="let item of array_of_books | search:term | filter:selectedGener" (onChanges)="onChangeEvent($event)" [array_book]="item" [ngStyle]="{'background-image': 'url('+item.imageSrc+')'}"></book>
+                <div class="dark_bg_popup" >
+                    <div class="popup_change">
+                        <button type="button" id="delete"><i class="fas fa-times"></i></button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

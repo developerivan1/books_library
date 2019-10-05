@@ -47,12 +47,17 @@ export class BooksComponent implements OnInit {
     }
   }
 
-  onChangeEvent(index_of_book) {
-    this.bookService.books_array.splice(index_of_book, 1);
-    localStorage.clear();
-    this.array_of_books = [];
-    this.localStorageInitialize();
-    this.completeArray();
-  }
+  onChangeEvent(array_book) {
+      for (let i = 0; i < this.bookService.books_array.length; i++) {
+        const element = this.bookService.books_array[i];
+        if (array_book.title === element.title) {
+          this.bookService.books_array.splice(i, 1);
+          localStorage.clear();
+          this.array_of_books = [];
+          this.localStorageInitialize();
+          this.completeArray();
+        }
+      }
+    }
 
 }

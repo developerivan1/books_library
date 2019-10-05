@@ -9,16 +9,18 @@ import { Book } from "../../book";
   styleUrls: ['./book.component.sass']
 })
 export class BookComponent implements OnInit {
-  @Output() onChanges = new EventEmitter<any>();
-  @Input() array_book: Book;
+
   all_books: Book[];
+
+  @Input() array_book: Book;
   @Input() index_of_book: number;
+  @Output() onChanges = new EventEmitter<any>();
+
   constructor(private bookService: BooksService) { }
 
   ngOnInit() {
   }
-  change(index_of_book) {
-    console.log(index_of_book);
-    this.onChanges.emit(index_of_book);
+  change(array_book) {
+    this.onChanges.emit(array_book);
   }
 }
