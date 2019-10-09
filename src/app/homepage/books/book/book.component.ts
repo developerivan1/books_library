@@ -15,6 +15,8 @@ export class BookComponent implements OnInit {
   @Input() array_book: Book;
   @Input() index_of_book: number;
   @Output() onChanges = new EventEmitter<any>();
+  @Output() onEdit = new EventEmitter<any>();
+  @Output() onSubmitChanges = new EventEmitter<any>();
 
   constructor(private bookService: BooksService) { }
 
@@ -22,5 +24,11 @@ export class BookComponent implements OnInit {
   }
   change(array_book) {
     this.onChanges.emit(array_book);
+  }
+  edit(array_book) {
+    this.onEdit.emit(array_book);
+  }
+  submitChanges(array_book) {
+    this.onSubmitChanges.emit(array_book);
   }
 }

@@ -1,9 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from "@angular/forms";
+import { HttpClientModule } from "@angular/common/http";
+
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api'
+import { ImMemoryDataService } from './homepage/books/data.service'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
 import { WelcomepageComponent } from './welcomepage/welcomepage.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { BooksComponent } from './homepage/books/books.component';
@@ -27,7 +30,9 @@ import { FilterPipe } from './filter.pipe';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
+    InMemoryWebApiModule.forRoot(ImMemoryDataService)
   ],
   providers: [BooksService],
   bootstrap: [AppComponent]
