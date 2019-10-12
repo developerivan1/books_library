@@ -21,8 +21,13 @@
         </div>
         <div class="container_fluid hoster_book">
             <div class="row">
-                <book *ngFor="let item of array_of_books | search:term | filter:selectedGener" (onSubmitChanges)="onSubmitChangesWEvent($event)" (onEdit)="onEditEvent($event)" (onChanges)="onChangeEvent($event)" [array_book]="item" [ngStyle]="{'background-image': 'url('+item.imageSrc+')'}"></book>
-                
+                <book *ngFor="let item of array_of_books | search:term | filter:selectedGener"
+                      (onSubmitChanges)="onSubmitChangesWEvent($event)"
+                      (onEdit)="onEditEvent($event)"
+                      (onChanges)="onChangeEvent($event)"
+                      [array_book]="item"
+                      [ngStyle]="{'background-image': 'url('+item.imageSrc+')'}"></book>
+
             </div>
         </div>
         <div class="dark_bg_popup" *ngIf="isActiveChangeBlock">

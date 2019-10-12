@@ -28,8 +28,7 @@ export class BooksService {
     return this.http.get<string[]>(`${this.apiUrlGeners}`);
   }
 
-  
   deleteBook(array_book): Observable<{}> {
-    return this.http.delete(this.apiUrlBooks)
+    return this.http.delete(this.apiUrlBooks);
   }
 }
