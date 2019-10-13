@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
-import { Book } from '../book';
-import { Author } from "../author";
+import { Book } from '../book.model';
+import { Author } from '../author.model';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -10,9 +10,9 @@ import { Observable } from 'rxjs';
 
 export class BooksService {
   // Urls for http
-  private apiUrlBooks = 'api/books_array';
-  private apiUrlAuthors = 'api/authors';
-  private apiUrlGeners = 'api/geners';
+  private apiUrlBooks = 'http://localhost:4200/api/booksArray';
+  private apiUrlAuthors = 'http://localhost:4200/api/authors';
+  private apiUrlGeners = 'http://localhost:4200/api/geners';
 
   constructor(private http: HttpClient) {}
 
@@ -29,6 +29,12 @@ export class BooksService {
   }
 
   deleteBook(array_book): Observable<{}> {
-    return this.http.delete(this.apiUrlBooks);
+    return this.http.delete(`${this.apiUrlBooks}/${array_book.id}`);
+  }
+  updateBook(putBook) {
+    return this.http.put( `${this.apiUrlBooks}/${putBook.id}`, putBook );
+  }
+  createBook(obj) {
+    return this.http.post(`${this.apiUrlBooks}`, obj);
   }
 }

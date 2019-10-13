@@ -3,7 +3,11 @@
         <div class="top_part">
             <h4>Books Library</h4>
             <div class="search_btn">
-                <input class="notActive" type="text" [(ngModel)]="term" placeholder="Search book..." [ngClass]="{'active_search': isActiveSearchBlock}">
+                <input  class="notActive" 
+                        type="text" 
+                        [(ngModel)]="term" 
+                        placeholder="Search book..." 
+                        [ngClass]="{'active_search': isActiveSearchBlock}">
                 <a href="#" [routerLink]="" (click)="activatedSearchBlock()">
                     <i class="fas fa-search"></i>
                 </a>
@@ -24,7 +28,7 @@
                 <book *ngFor="let item of array_of_books | search:term | filter:selectedGener"
                       (onSubmitChanges)="onSubmitChangesWEvent($event)"
                       (onEdit)="onEditEvent($event)"
-                      (onChanges)="onChangeEvent($event)"
+                      (onDelete)="onDeleteEvent($event)"
                       [array_book]="item"
                       [ngStyle]="{'background-image': 'url('+item.imageSrc+')'}"></book>
 
@@ -40,32 +44,48 @@
                                     Title
                                 </label>
                                 <br>
-                                <input class="form-control" [(ngModel)]="title_book_for_edit" name="title" type="text" id="title" placeholder="Enter a new title">
+                                <input  class="form-control" 
+                                        [(ngModel)]="title_book_for_edit" 
+                                        name="title" type="text" id="title" 
+                                        placeholder="Enter a new title">
                             </div>
                         </div>
                         <div class="number_pages_block">
                             <div class="form_group">
                                 <label for="numberOfPages">Number of pages</label>
                                 <br>
-                                <input class="form-control" [(ngModel)]="numberOfPages_for_edit" name="numberOfPages" type="text" id="numberOfPages" placeholder="Enter a new number of pages">
+                                <input class="form-control" 
+                                       [(ngModel)]="numberOfPages_for_edit" 
+                                       name="numberOfPages" 
+                                       type="text" 
+                                       id="numberOfPages" 
+                                       placeholder="Enter a new number of pages">
                             </div>
                         </div>
                         <div class="gener_block">
                             <div class="form-group">
                                 <label for="gener">Gener</label>
                                 <br>
-                                <select class="form-control" [(ngModel)]="gener_for_edit" name="gener">
-                                    <option *ngFor="let gener of bookService.geners">{{ gener }}</option>
+                                <select class="form-control" 
+                                        [(ngModel)]="gener_for_edit" 
+                                        name="gener">
+                                    <option *ngFor="let gener of geners">{{ gener }}</option>
                                 </select>
                             </div>
                         </div>
                         <div class="submit_block">
                             <div class="submit_block form_group">
-                                <button class="btn btn-dark" (click)="onSubmitChangesEvent()" type="button">Submit</button>
+                                <button class="btn btn-dark" 
+                                        (click)="onSubmitChangesEvent(array_book)" 
+                                        type="button">Submit</button>
                             </div>
                         </div>
                     </form>
-                    <button type="button" (click)="closeEditBlock()" id="delete"><i class="fas fa-times"></i></button>
+                        <button type="button" 
+                            (click)="closeEditBlock()" 
+                            id="delete">
+                            <i class="fas fa-times"></i>
+                        </button>
                 </div>
         </div>
     </div>

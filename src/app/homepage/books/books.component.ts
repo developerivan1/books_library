@@ -2,7 +2,7 @@ import {Component, OnInit, Input, Output} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {NgForm} from '@angular/forms';
 
-import {Book} from '../book';
+import {Book} from '../book.model';
 import {BooksService} from './books.service';
 import {SearchPipe} from '../../search.pipe';
 import {FilterPipe} from '../../filter.pipe';
@@ -16,10 +16,11 @@ import {FilterPipe} from '../../filter.pipe';
 export class BooksComponent implements OnInit {
 
   // Edit froms property
+  id: number;
+  imgSrc: string;
   title_book_for_edit: string;
   numberOfPages_for_edit: number;
   gener_for_edit: string;
-  book_for_change = {title: '', numberOfPages: 0, gener: ''};
 
   // Active property for template
   isActiveChangeBlock: boolean;
@@ -59,51 +60,42 @@ export class BooksComponent implements OnInit {
   }
 
   // Output events
-  onChangeEvent(arrayBook) {
+  onDeleteEvent(arrayBook) {
     const index = this.array_of_books.indexOf(arrayBook);
-    if (index) {
+    if (index !== null || index !== undefined) {
       this.array_of_books = this.array_of_books.filter((book, i) => i !== index);
     }
-    // for (let i = 0; i < this.bookService.books_array.length; i++) {
-    //   const element = this.bookService.books_array[i];
-    //   if (array_book.title === element.title) {
-    //     this.bookService.books_array.splice(i, 1);
-    //     localStorage.clear();
-    //     this.array_of_books = [];
-    //   }
-    // }
-    console.log(arrayBook);
+    this.bookService.deleteBook(arrayBook).subscribe();
   }
 
   onEditEvent(arrayBook) {
+    this.id = arrayBook.id;
+    if (arrayBook.imageSrc) {
+      this.imgSrc = arrayBook.imageSrc;
+    }
     this.isActiveChangeBlock = true;
     this.title_book_for_edit = arrayBook.title;
     this.numberOfPages_for_edit = arrayBook.numberOfPages;
     this.gener_for_edit = arrayBook.gener;
-    this.book_for_change.title = arrayBook.title;
-    this.book_for_change.numberOfPages = arrayBook.numberOfPages;
-    this.book_for_change.gener = arrayBook.gener;
   }
 
   onSubmitChangesEvent() {
-    // for (let i = 0; i < this.bookService.books_array.length; i++) {
-    //   const element = this.bookService.books_array[i];
-    //   if (element.title === this.book_for_change.title) {
-    //     element.title = this.title_book_for_edit;
-    //     element.numberOfPages = this.numberOfPages_for_edit;
-    //     element.gener = this.gener_for_edit;
-    //     this.array_of_books = [];
-    //     localStorage.clear();
-    //     this.closeEditBlock();
-    //     this.book_for_change = { title: "", numberOfPages: 0, gener: '' }
-    //   } else {
-    //     console.log("Error");
-    //   }
-    // }
-    // console.log(this.bookService.books_array);
-    // console.log(this.book_for_change);
-  }
+    const putBook = {
+      id: (this.id),
+      title: this.title_book_for_edit,
+      numberOfPages: this.numberOfPages_for_edit,
+      gener: this.gener_for_edit,
+      imageSrc: this.imgSrc
+    };
+    this.array_of_books.map((item, i) => {
+      if(item.id === putBook.id) {
+        this.array_of_books.splice(i, 1, putBook);
+      }
+    });
+    this.bookService.updateBook(putBook).subscribe();
+    this.isActiveChangeBlock = false;
 
+  }
 
   closeEditBlock() {
     this.isActiveChangeBlock = false;

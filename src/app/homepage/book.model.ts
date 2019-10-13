@@ -1,6 +1,7 @@
 export interface Book {
+    id: number;
     title: string;
     numberOfPages: number;
-    imageSrc: string;
+    imageSrc?: string;
     gener: string;
 }

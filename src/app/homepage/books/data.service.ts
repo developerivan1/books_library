@@ -1,130 +1,151 @@
 import {InMemoryDbService} from 'angular-in-memory-web-api';
-import {Book} from '../book';
-import {Author} from '../author';
+import {Book} from '../book.model';
+import {Author} from '../author.model';
 
 export class ImMemoryDataService implements InMemoryDbService {
   createDb() {
-
-    //  Change on this https://any-api.com/nytimes_com/books_api/docs/_lists_format_/GET_lists_format, P.S. for example
-    // I dont understand why this type work xD
-    // TSLint: variable name must be in lowerCamelCase, PascalCase or UPPER_CASE (variable-name
-    const books_array: [Book] = [
+    const booksArray: Book[] = [
       {
+        id: 0,
         title: 'Harry Potter and the Prisoner of Azkaban',
         numberOfPages: 450,
         imageSrc: '../../../assets/Photos/books_library_images/hp-2.jpg',
         gener: 'Fantasy'
       },
       {
+        id: 1,
         title: 'Harry Potter and the philosophers stone',
-        numbaerOfPages: 350,
+        numberOfPages: 350,
         imageSrc: '../../../assets/Photos/books_library_images/hp-1.jpg',
         gener: 'Fantasy'
       },
       {
+        id: 2,
         title: 'Stephen King It',
         numberOfPages: 650,
         imageSrc: '../../../assets/Photos/books_library_images/st_it.jpg',
         gener: 'Horror'
       },
       {
+        id: 3,
         title: 'Stephen King Outsider',
         numberOfPages: 300,
         imageSrc: '../../../assets/Photos/books_library_images/sk-outsider.jpg',
         gener: 'Crime'
       },
       {
+        id: 4,
         title: 'Stephen King Green Mile',
         numberOfPages: 450,
         imageSrc: '../../../assets/Photos/books_library_images/sk-zelenaia_milya.jpg',
         gener: 'Fantasy'
       },
       {
+        id: 5,
         title: 'The subtle art of indifference',
         numberOfPages: 750,
         imageSrc: '../../../assets/Photos/books_library_images/pofig.jpg',
         gener: 'Psyhology'
       },
       {
+        id: 6,
         title: 'Stephen King Pet cemetery',
         numberOfPages: 450,
         imageSrc: '../../../assets/Photos/books_library_images/sk-kdz.jpg',
         gener: 'Horror'
       },
       {
+        id: 7,
         title: 'Сity ​​of dreams: mercenary',
         numberOfPages: 450,
         imageSrc: '../../../assets/Photos/books_library_images/naemnik.jpg',
         gener: 'Detective'
       },
       {
+        id: 8,
         title: 'Ernest Hemingway goodbye weapon',
         numberOfPages: 250,
         imageSrc: '../../../assets/Photos/books_library_images/eh-proshai_oruzhie.jpg',
         gener: 'Romans'
       },
-      {title: 'Gomer Iliada', numberOfPages: 200, imageSrc: '../../../assets/Photos/books_library_images/gomer-iliada.jpg', gener: 'Epic'},
       {
+        id: 9,
+        title: 'Gomer Iliada',
+        numberOfPages: 200,
+        imageSrc: '../../../assets/Photos/books_library_images/gomer-iliada.jpg',
+        gener: 'Epic'},
+      {
+        id: 10,
         title: 'Harry Potter and the goblet of fire',
         numberOfPages: 320,
         imageSrc: '../../../assets/Photos/books_library_images/hp-4.jpg',
         gener: 'Fantasy'
       },
       {
+        id: 11,
         title: 'Harry Potter and the damned child',
         numberOfPages: 450,
         imageSrc: '../../../assets/Photos/books_library_images/hp-9.jpg',
         gener: 'Fantasy'
       },
       {
+        id: 12,
         title: 'Quentin Tarantino criminal minds',
         numberOfPages: 210,
         imageSrc: '../../../assets/Photos/books_library_images/kriminalnoe-chtivo.jpg',
         gener: 'Crime'
       },
       {
+        id: 13,
         title: 'Mikhail Bulgakov Dog Heart',
         numberOfPages: 110,
         imageSrc: '../../../assets/Photos/books_library_images/misha.jpg',
         gener: 'Novel'
       },
       {
+        id: 14,
         title: 'Gaston Leroux The Phantom of the Opera',
         numberOfPages: 440,
         imageSrc: '../../../assets/Photos/books_library_images/prizrak.jpg',
         gener: 'Romans'
       },
       {
+        id: 15,
         title: 'Tammara Webber Just Together',
         numberOfPages: 290,
         imageSrc: '../../../assets/Photos/books_library_images/prosto-vdvoem.jpg',
         gener: 'Romans'
       },
       {
+        id: 16,
         title: 'Erich Maria Remarque Arc de Triomphe',
         numberOfPages: 100,
         imageSrc: '../../../assets/Photos/books_library_images/remark-arka.jpg',
         gener: 'Romans'
       },
       {
+        id: 17,
         title: 'Stephen King Happy Country',
         numberOfPages: 140,
         imageSrc: '../../../assets/Photos/books_library_images/sk-happy_country.jpg',
         gener: 'Fantasy'
       },
       {
+        id: 18,
         title: 'Stephen King Needed Things',
         numberOfPages: 140,
         imageSrc: '../../../assets/Photos/books_library_images/sk-musthave_things.jpg',
         gener: 'Fantasy'
       },
       {
+        id: 19,
         title: 'Sabrina Jeffries Testament Passion',
         numberOfPages: 140,
         imageSrc: '../../../assets/Photos/books_library_images/strat_po_zaveshaniu.jpg',
         gener: 'Romans'
       },
     ];
+
     const authors: Author[] = [
       {
         surename: 'Rowling',
@@ -208,6 +229,6 @@ export class ImMemoryDataService implements InMemoryDbService {
       'Epic',
       'Novel'
     ];
-    return {books_array, authors, geners}
+    return { booksArray, authors, geners };
   }
 }
