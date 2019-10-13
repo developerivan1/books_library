@@ -4,9 +4,7 @@ import { Book } from '../book.model';
 import { Author } from '../author.model';
 import { Observable } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 
 export class BooksService {
   // Urls for http
@@ -28,8 +26,8 @@ export class BooksService {
     return this.http.get<string[]>(`${this.apiUrlGeners}`);
   }
 
-  deleteBook(array_book): Observable<{}> {
-    return this.http.delete(`${this.apiUrlBooks}/${array_book.id}`);
+  deleteBook(arrayBook): Observable<{}> {
+    return this.http.delete(`${this.apiUrlBooks}/${arrayBook.id}`);
   }
   updateBook(putBook) {
     return this.http.put( `${this.apiUrlBooks}/${putBook.id}`, putBook );

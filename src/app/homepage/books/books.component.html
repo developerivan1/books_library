@@ -29,7 +29,7 @@
                       (onSubmitChanges)="onSubmitChangesWEvent($event)"
                       (onEdit)="onEditEvent($event)"
                       (onDelete)="onDeleteEvent($event)"
-                      [array_book]="item"
+                      [arrayBook]="item"
                       [ngStyle]="{'background-image': 'url('+item.imageSrc+')'}"></book>
 
             </div>
@@ -47,7 +47,8 @@
                                 <input  class="form-control" 
                                         [(ngModel)]="title_book_for_edit" 
                                         name="title" type="text" id="title" 
-                                        placeholder="Enter a new title">
+                                        placeholder="Enter a new title"
+                                        autocomplete="off">
                             </div>
                         </div>
                         <div class="number_pages_block">
@@ -55,11 +56,11 @@
                                 <label for="numberOfPages">Number of pages</label>
                                 <br>
                                 <input class="form-control" 
-                                       [(ngModel)]="numberOfPages_for_edit" 
                                        name="numberOfPages" 
                                        type="text" 
                                        id="numberOfPages" 
-                                       placeholder="Enter a new number of pages">
+                                       placeholder="Enter a new number of pages"
+                                       autocomplete="off">
                             </div>
                         </div>
                         <div class="gener_block">
@@ -76,7 +77,61 @@
                         <div class="submit_block">
                             <div class="submit_block form_group">
                                 <button class="btn btn-dark" 
-                                        (click)="onSubmitChangesEvent(array_book)" 
+                                        (click)="onSubmitChangesEvent(arrayBook)" 
+                                        type="button">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                        <button type="button" 
+                            (click)="closeEditBlock()" 
+                            id="delete">
+                            <i class="fas fa-times"></i>
+                        </button>
+                </div>
+        </div>
+        <div class="dark_bg_popup" >
+            <div class="popup_change">
+                    <h5>Create a new Book</h5>
+                    <form class="edit_form" #myForm="ngForm">
+                        <div class="form_group">
+                            <div class="title_block">
+                                <label for="">
+                                    Title
+                                </label>
+                                <br>
+                                <input  class="form-control" 
+                                        name="title" type="text" id="" 
+                                        placeholder="Enter a new title"
+                                        autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="number_pages_block">
+                            <div class="form_group">
+                                <label for="numberOfPages">Number of pages</label>
+                                <br>
+                                <input class="form-control" 
+                                       name="numberOfPages" 
+                                       type="text" 
+                                       placeholder="Enter a new number of pages"
+                                       autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="gener_block">
+                            <div class="form-group">
+                                <label for="gener">Gener</label>
+                                <br>
+                                <select class="form-control" 
+                                        [(ngModel)]="gener_for_edit" 
+                                        name="gener">
+                                    <option *ngFor="let gener of geners">{{ gener }}</option>
+                                    <option value="other">Other gener</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="submit_block">
+                            <div class="submit_block form_group">
+                                <button class="btn btn-dark" 
+                                        (click)="onSubmitChangesEvent(arrayBook)" 
                                         type="button">Submit</button>
                             </div>
                         </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BooksService } from '../books.service';
 import { Book } from '../../book.model';
@@ -8,27 +8,21 @@ import { Book } from '../../book.model';
   templateUrl: './book.component.html',
   styleUrls: ['./book.component.sass']
 })
-export class BookComponent implements OnInit {
+export class BookComponent {
 
-  all_books: Book[];
-
-  @Input() array_book: Book;
-  @Input() index_of_book: number;
+  @Input() arrayBook: Book;
   @Output() onDelete = new EventEmitter<any>();
   @Output() onEdit = new EventEmitter<any>();
   @Output() onSubmitChanges = new EventEmitter<any>();
 
   constructor(private bookService: BooksService) { }
-
-  ngOnInit() {
+  delete(arrayBook) {
+    this.onDelete.emit(arrayBook);
   }
-  delete(array_book) {
-    this.onDelete.emit(array_book);
+  edit(arrayBook) {
+    this.onEdit.emit(arrayBook);
   }
-  edit(array_book) {
-    this.onEdit.emit(array_book);
-  }
-  submitChanges(array_book) {
-    this.onSubmitChanges.emit(array_book);
+  submitChanges(arrayBook) {
+    this.onSubmitChanges.emit(arrayBook);
   }
 }
