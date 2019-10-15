@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, Output} from '@angular/core';
+import {Component, OnInit, OnChanges, Input, Output, EventEmitter} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {NgForm} from '@angular/forms';
 
@@ -6,6 +6,7 @@ import {Book} from '../book.model';
 import {BooksService} from './books.service';
 import {SearchPipe} from '../../search.pipe';
 import {FilterPipe} from '../../filter.pipe';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-books',
@@ -14,8 +15,18 @@ import {FilterPipe} from '../../filter.pipe';
 })
 
 export class BooksComponent implements OnInit {
+  // Create forms property
+  title: string;
+  numberOfPages: number;
+  generr: string;
+  imageSrc: string;
+  otherGener: string;
 
-  // Edit froms property
+  // Property for files
+  fileData: File = null;
+  previewUrl: any = null;
+
+  // Edit forms property
   id: number;
   imgSrc: string;
   title_book_for_edit: string;
@@ -25,13 +36,15 @@ export class BooksComponent implements OnInit {
   // Active property for template
   isActiveChangeBlock: boolean;
   isActiveSearchBlock: boolean;
+  isActiveCreateBlock: boolean;
+  isActiveOtherGener: boolean;
 
   // Input property
   @Input() term: string;
   @Input() array_of_books: any[] = [];
-
-
+  @Input() events: Observable<void>;
   // Gener
+
   public geners = [];
   public selectedGener;
 
@@ -42,10 +55,31 @@ export class BooksComponent implements OnInit {
   ngOnInit() {
     this.isActiveSearchBlock = false;
     this.isActiveChangeBlock = false;
+    this.isActiveCreateBlock = false;
+    this.isActiveOtherGener = false;
     this.selectedGener = 'All books';
     this.getBooks();
     this.getGeners();
   }
+
+  // Methods for reading files
+  fileProgress(fileInput: any) {
+    this.fileData = fileInput.target.files[0] as File;
+    this.preview();
+  }
+
+  preview() {
+    const mimeType = this.fileData.type;
+    if (mimeType.match(/image\/*/) == null) {
+      return;
+    }
+    const reader = new FileReader();
+    reader.readAsDataURL(this.fileData);
+    reader.onload = (event) => {
+      this.previewUrl = reader.result;
+    };
+  }
+
 
   getBooks() {
     this.bookService.getBooks().subscribe(data => this.array_of_books = data);
@@ -88,16 +122,52 @@ export class BooksComponent implements OnInit {
       imageSrc: this.imgSrc
     };
     this.array_of_books.map((item, i) => {
-      if(item.id === putBook.id) {
-        this.array_of_books.splice(i, 1, putBook);
+      if (item.id === putBook.id) {
+        const index = this.array_of_books.indexOf(item);
+        this.array_of_books.splice(index, 1, putBook);
       }
     });
     this.bookService.updateBook(putBook).subscribe();
     this.isActiveChangeBlock = false;
 
   }
-
+  onSubmitNewBook() {
+    let g;
+    if (this.title.length !== 0 && this.numberOfPages !== 0 && this.generr !== undefined || null ) {
+      if (this.otherGener !== null || undefined ) {
+        if (this.geners.includes(this.otherGener)) {
+          return;
+        } else {
+        this.geners.push(this.otherGener);
+        this.bookService.createGener(this.otherGener).subscribe();
+        g = this.otherGener;
+        }
+        } else {
+          g = this.generr;
+        }
+      }
+    const newBook: Book = {
+      id: (this.array_of_books.length + 1),
+      title: this.title,
+      numberOfPages: this.numberOfPages,
+      gener: g,
+      imageSrc: this.previewUrl};
+      this.bookService.createBook(newBook).subscribe();
+      this.array_of_books.push(newBook);
+      this.isActiveCreateBlock = false;
+    }
   closeEditBlock() {
     this.isActiveChangeBlock = false;
+  }
+  closeCreateBlock() {
+    this.isActiveCreateBlock = false;
+  }
+
+  isOtherBlockActive(event) {
+    if (event == 'other') {
+      this.isActiveOtherGener = !this.isActiveOtherGener;
+    } else {
+      this.isActiveOtherGener = false;
+    }
   }
 }

@@ -56,7 +56,8 @@
                                 <label for="numberOfPages">Number of pages</label>
                                 <br>
                                 <input class="form-control" 
-                                       name="numberOfPages" 
+                                       name="numberOfPages"
+                                       [(ngModel)]="numberOfPages_for_edit" 
                                        type="text" 
                                        id="numberOfPages" 
                                        placeholder="Enter a new number of pages"
@@ -89,7 +90,7 @@
                         </button>
                 </div>
         </div>
-        <div class="dark_bg_popup" >
+        <div class="dark_bg_popup" *ngIf="isActiveCreateBlock">
             <div class="popup_change">
                     <h5>Create a new Book</h5>
                     <form class="edit_form" #myForm="ngForm">
@@ -102,7 +103,9 @@
                                 <input  class="form-control" 
                                         name="title" type="text" id="" 
                                         placeholder="Enter a new title"
-                                        autocomplete="off">
+                                        autocomplete="off"
+                                        [(ngModel)]="title"
+                                        required>
                             </div>
                         </div>
                         <div class="number_pages_block">
@@ -113,7 +116,9 @@
                                        name="numberOfPages" 
                                        type="text" 
                                        placeholder="Enter a new number of pages"
-                                       autocomplete="off">
+                                       autocomplete="off"
+                                       [(ngModel)]="numberOfPages"
+                                       required>
                             </div>
                         </div>
                         <div class="gener_block">
@@ -121,23 +126,39 @@
                                 <label for="gener">Gener</label>
                                 <br>
                                 <select class="form-control" 
-                                        [(ngModel)]="gener_for_edit" 
-                                        name="gener">
+                                        [(ngModel)]="generr" 
+                                        (ngModelChange)="isOtherBlockActive($event)"
+                                        name="gener"
+                                        required>
                                     <option *ngFor="let gener of geners">{{ gener }}</option>
                                     <option value="other">Other gener</option>
                                 </select>
+                                <input  type="text"
+                                        id="other_gener" 
+                                        class="form-control"
+                                        name="other-gener"
+                                        placeholder="Enter a new gener"
+                                        autocomplete="off"
+                                        [(ngModel)]="otherGener"
+                                        *ngIf="isActiveOtherGener"
+                                        required
+                                >
+                            </div>
+                            <div class="imageBlock">
+                                <label id="file_label" for="upload">Add book cover</label>
+                                <input type="file" id="upload" name="file" accept="image/*" (change)="fileProgress($event)">
                             </div>
                         </div>
                         <div class="submit_block">
                             <div class="submit_block form_group">
-                                <button class="btn btn-dark" 
-                                        (click)="onSubmitChangesEvent(arrayBook)" 
+                                <button class="btn btn-dark"
+                                        (click)="onSubmitNewBook()" 
                                         type="button">Submit</button>
                             </div>
                         </div>
                     </form>
                         <button type="button" 
-                            (click)="closeEditBlock()" 
+                            (click)="closeCreateBlock()" 
                             id="delete">
                             <i class="fas fa-times"></i>
                         </button>

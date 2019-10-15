@@ -1,8 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormsModule } from "@angular/forms";
-
-import { BooksService } from "./books/books.service";
-import { Book } from "./book";
+import { Component, ViewChild } from '@angular/core';
+import { BooksService } from './books/books.service';
+import { BooksComponent } from './books/books.component';
 
 @Component({
   selector: 'app-homepage',
@@ -11,9 +9,12 @@ import { Book } from "./book";
 })
 
 export class HomepageComponent {
+  @ViewChild(BooksComponent, {static: false})
 
-
+  private booksComponent: BooksComponent;
   constructor(private bookService: BooksService) { }
-
+  onCreate() {
+    this.booksComponent.isActiveCreateBlock = true;
+  }
 
 }

@@ -35,4 +35,7 @@ export class BooksService {
   createBook(obj) {
     return this.http.post(`${this.apiUrlBooks}`, obj);
   }
+  createGener(gener) {
+    return this.http.post(`${this.apiUrlGeners}`, gener);
+  }
 }
