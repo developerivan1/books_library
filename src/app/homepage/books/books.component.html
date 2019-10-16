@@ -16,7 +16,7 @@
         <div class="filter_block">
             <select [(ngModel)]="selectedGener" name="geners" id="geners">
                 <option selected>All books</option>
-                <option *ngFor="let g of geners">{{ g }}</option>
+                <option *ngFor="let g of geners">{{ g.gener }}</option>
             </select>
             <div class="howManyBooks">
                 <span class="books_num">{{ array_of_books.length }}</span>
@@ -71,7 +71,7 @@
                                 <select class="form-control" 
                                         [(ngModel)]="gener_for_edit" 
                                         name="gener">
-                                    <option *ngFor="let gener of geners">{{ gener }}</option>
+                                    <option *ngFor="let g of geners">{{ g.gener }}</option>
                                 </select>
                             </div>
                         </div>
@@ -102,7 +102,7 @@
                                 <br>
                                 <input  class="form-control" 
                                         name="title" type="text" id="" 
-                                        placeholder="Enter a new title"
+                                        placeholder="Enter a title"
                                         autocomplete="off"
                                         [(ngModel)]="title"
                                         required>
@@ -115,10 +115,11 @@
                                 <input class="form-control" 
                                        name="numberOfPages" 
                                        type="text" 
-                                       placeholder="Enter a new number of pages"
+                                       placeholder="Enter number of pages"
                                        autocomplete="off"
                                        [(ngModel)]="numberOfPages"
-                                       required>
+                                       required
+                                       >
                             </div>
                         </div>
                         <div class="gener_block">
@@ -130,14 +131,14 @@
                                         (ngModelChange)="isOtherBlockActive($event)"
                                         name="gener"
                                         required>
-                                    <option *ngFor="let gener of geners">{{ gener }}</option>
+                                    <option *ngFor="let g of geners">{{ g.gener }}</option>
                                     <option value="other">Other gener</option>
                                 </select>
                                 <input  type="text"
                                         id="other_gener" 
                                         class="form-control"
                                         name="other-gener"
-                                        placeholder="Enter a new gener"
+                                        placeholder="Enter a gener"
                                         autocomplete="off"
                                         [(ngModel)]="otherGener"
                                         *ngIf="isActiveOtherGener"

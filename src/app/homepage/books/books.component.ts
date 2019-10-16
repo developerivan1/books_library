@@ -135,11 +135,14 @@ export class BooksComponent implements OnInit {
     let g;
     if (this.title.length !== 0 && this.numberOfPages !== 0 && this.generr !== undefined || null ) {
       if (this.otherGener !== null || undefined ) {
-        if (this.geners.includes(this.otherGener)) {
+        const allGeners: string[] = this.geners.map((item) => {
+          return item.gener;
+        });
+        if (allGeners.includes(this.otherGener)) {
           return;
         } else {
-        this.geners.push(this.otherGener);
-        this.bookService.createGener(this.otherGener).subscribe();
+        this.geners.push({ id: this.geners.length + 1, gener: this.otherGener});
+        this.bookService.createGener({ id: this.geners.length + 1, gener: this.otherGener}).subscribe();
         g = this.otherGener;
         }
         } else {

@@ -218,16 +218,16 @@ export class ImMemoryDataService implements InMemoryDbService {
       },
     ];
 
-    const geners: string[] = [
-      'Romans',
-      'Classic',
-      'Crime',
-      'Detective',
-      'Fantasy',
-      'Horror',
-      'Psyhology',
-      'Epic',
-      'Novel'
+    const geners = [
+      {id: 0, gener: 'Romans'},
+      {id: 1, gener: 'Classic'},
+      {id: 2, gener: 'Crime'},
+      {id: 3, gener: 'Detective'},
+      {id: 4, gener: 'Fantasy'},
+      {id: 5, gener: 'Horror'},
+      {id: 6, gener: 'Psyhology'},
+      {id: 7, gener: 'Epic'},
+      {id: 8, gener: 'Novel'},
     ];
     return { booksArray, authors, geners };
   }
