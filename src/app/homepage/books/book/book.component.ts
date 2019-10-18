@@ -11,18 +11,18 @@ import { Book } from '../../book.model';
 export class BookComponent {
 
   @Input() arrayBook: Book;
-  @Output() onDelete = new EventEmitter<any>();
-  @Output() onEdit = new EventEmitter<any>();
-  @Output() onSubmitChanges = new EventEmitter<any>();
+  @Output() ondelete = new EventEmitter<any>();
+  @Output() onedit = new EventEmitter<any>();
+  @Output() onsubmitChanges = new EventEmitter<any>();
 
   constructor(private bookService: BooksService) { }
   delete(arrayBook) {
-    this.onDelete.emit(arrayBook);
+    this.ondelete.emit(arrayBook);
   }
   edit(arrayBook) {
-    this.onEdit.emit(arrayBook);
+    this.onedit.emit(arrayBook);
   }
   submitChanges(arrayBook) {
-    this.onSubmitChanges.emit(arrayBook);
+    this.onsubmitChanges.emit(arrayBook);
   }
 }

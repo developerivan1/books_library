@@ -1,0 +1,73 @@
+<div class="popup_change">
+    <h5>Create a new Book</h5>
+    <form class="edit_form" #myForm="ngForm">
+        <div class="form_group">
+            <div class="title_block">
+                <label for="">
+                    Title
+                </label>
+                <br>
+                <input  class="form-control" 
+                        name="title" type="text" id="" 
+                        placeholder="Enter a title"
+                        autocomplete="off"
+                        [(ngModel)]="title"
+                        required>
+            </div>
+        </div>
+        <div class="number_pages_block">
+            <div class="form_group">
+                <label for="numberOfPages">Number of pages</label>
+                <br>
+                <input class="form-control" 
+                       name="numberOfPages" 
+                       type="text" 
+                       placeholder="Enter number of pages"
+                       autocomplete="off"
+                       [(ngModel)]="numberOfPages"
+                       required
+                       >
+            </div>
+        </div>
+        <div class="gener_block">
+            <div class="form-group">
+                <label for="gener">Gener</label>
+                <br>
+                <select class="form-control" 
+                        [(ngModel)]="generr" 
+                        (ngModelChange)="isOtherBlockActive($event)"
+                        name="gener"
+                        required>
+                    <option *ngFor="let g of geners">{{ g.gener }}</option>
+                    <option value="other">Other gener</option>
+                </select>
+                <input  type="text"
+                        id="other_gener" 
+                        class="form-control"
+                        name="other-gener"
+                        placeholder="Enter a gener"
+                        autocomplete="off"
+                        [(ngModel)]="otherGener"
+                        *ngIf="isActiveOtherGener"
+                        required
+                >
+            </div>
+            <div class="imageBlock">
+                <label id="file_label" for="upload">Add book cover</label>
+                <input type="file" id="upload" name="file" accept="image/*" (change)="fileProgress($event)">
+            </div>
+        </div>
+        <div class="submit_block">
+            <div class="submit_block form_group">
+                <button class="btn btn-dark"
+                        (click)="onSubmitNewBook($event)" 
+                        type="button">Submit</button>
+            </div>
+        </div>
+    </form>
+        <button type="button" 
+            (click)="closeCreateBlock()" 
+            id="delete">
+            <i class="fas fa-times"></i>
+        </button>
+</div>

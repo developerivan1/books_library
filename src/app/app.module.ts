@@ -15,7 +15,9 @@ import { AuthorsComponent } from './homepage/authors/authors.component';
 import { BookComponent } from './homepage/books/book/book.component';
 import { SearchPipe } from './search.pipe';
 import { FilterPipe } from './filter.pipe';
-
+import { FormsForChangingBookComponent } from './homepage/books/forms-for-changing-book/forms-for-changing-book.component';
+import { FromsForCreateBookComponent } from './homepage/books/froms-for-create-book/froms-for-create-book.component';
+import { ActiveTemplateService } from './homepage/active-template.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +27,9 @@ import { FilterPipe } from './filter.pipe';
     AuthorsComponent,
     BookComponent,
     SearchPipe,
-    FilterPipe
+    FilterPipe,
+    FormsForChangingBookComponent,
+    FromsForCreateBookComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +38,8 @@ import { FilterPipe } from './filter.pipe';
     HttpClientModule,
     InMemoryWebApiModule.forRoot(ImMemoryDataService)
   ],
-  providers: [BooksService],
+  providers: [BooksService,
+              ActiveTemplateService],
   bootstrap: [AppComponent]
 })
 

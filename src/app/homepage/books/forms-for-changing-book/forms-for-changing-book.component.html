@@ -1,0 +1,54 @@
+<div class="popup_change">
+    <h5>Edit Book Information</h5>
+    <form class="edit_form" #myForm="ngForm">
+        <div class="form_group">
+            <div class="title_block">
+                <label for="title">
+                    Title
+                </label>
+                <br>
+                <input  class="form-control" 
+                        [(ngModel)]="arrayBookForChanging.title" 
+                        name="title" type="text" id="title" 
+                        placeholder="Enter a new title"
+                        autocomplete="off">
+            </div>
+        </div>
+        <div class="number_pages_block">
+            <div class="form_group">
+                <label for="numberOfPages">Number of pages</label>
+                <br>
+                <input class="form-control" 
+                       name="numberOfPages"
+                       [(ngModel)]="arrayBookForChanging.numberOfPages" 
+                       type="text" 
+                       id="numberOfPages" 
+                       placeholder="Enter a new number of pages"
+                       autocomplete="off">
+            </div>
+        </div>
+        <div class="gener_block">
+            <div class="form-group">
+                <label for="gener">Gener</label>
+                <br>
+                <select class="form-control" 
+                        [(ngModel)]="arrayBookForChanging.gener" 
+                        name="gener">
+                    <option *ngFor="let g of geners">{{ g.gener }}</option>
+                </select>
+            </div>
+        </div>
+        <div class="submit_block">
+            <div class="submit_block form_group">
+                <button class="btn btn-dark" 
+                        (click)="onSubmitChangesEvent(arrayBook)" 
+                        type="button">Submit</button>
+            </div>
+        </div>
+    </form>
+        <button type="button" 
+            (click)="closeEditBlock()" 
+            id="delete">
+            <i class="fas fa-times"></i>
+        </button>
+</div>

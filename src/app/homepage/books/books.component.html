@@ -7,7 +7,7 @@
                         type="text" 
                         [(ngModel)]="term" 
                         placeholder="Search book..." 
-                        [ngClass]="{'active_search': isActiveSearchBlock}">
+                        [ngClass]="{'active_search': activeTemplate.isActiveSearchBlock}">
                 <a href="#" [routerLink]="" (click)="activatedSearchBlock()">
                     <i class="fas fa-search"></i>
                 </a>
@@ -26,145 +26,17 @@
         <div class="container_fluid hoster_book">
             <div class="row">
                 <book *ngFor="let item of array_of_books | search:term | filter:selectedGener"
-                      (onSubmitChanges)="onSubmitChangesWEvent($event)"
-                      (onEdit)="onEditEvent($event)"
-                      (onDelete)="onDeleteEvent($event)"
+                      (onsubmitChanges)="onSubmitChangesEvent($event)"
+                      (ondelete)="onDeleteEvent($event)"
+                      (onedit)="onEditEvent($event)"
                       [arrayBook]="item"
                       [ngStyle]="{'background-image': 'url('+item.imageSrc+')'}"></book>
 
             </div>
         </div>
-        <div class="dark_bg_popup" *ngIf="isActiveChangeBlock">
-            <div class="popup_change">
-                    <h5>Edit Book Information</h5>
-                    <form class="edit_form" #myForm="ngForm">
-                        <div class="form_group">
-                            <div class="title_block">
-                                <label for="title">
-                                    Title
-                                </label>
-                                <br>
-                                <input  class="form-control" 
-                                        [(ngModel)]="title_book_for_edit" 
-                                        name="title" type="text" id="title" 
-                                        placeholder="Enter a new title"
-                                        autocomplete="off">
-                            </div>
-                        </div>
-                        <div class="number_pages_block">
-                            <div class="form_group">
-                                <label for="numberOfPages">Number of pages</label>
-                                <br>
-                                <input class="form-control" 
-                                       name="numberOfPages"
-                                       [(ngModel)]="numberOfPages_for_edit" 
-                                       type="text" 
-                                       id="numberOfPages" 
-                                       placeholder="Enter a new number of pages"
-                                       autocomplete="off">
-                            </div>
-                        </div>
-                        <div class="gener_block">
-                            <div class="form-group">
-                                <label for="gener">Gener</label>
-                                <br>
-                                <select class="form-control" 
-                                        [(ngModel)]="gener_for_edit" 
-                                        name="gener">
-                                    <option *ngFor="let g of geners">{{ g.gener }}</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="submit_block">
-                            <div class="submit_block form_group">
-                                <button class="btn btn-dark" 
-                                        (click)="onSubmitChangesEvent(arrayBook)" 
-                                        type="button">Submit</button>
-                            </div>
-                        </div>
-                    </form>
-                        <button type="button" 
-                            (click)="closeEditBlock()" 
-                            id="delete">
-                            <i class="fas fa-times"></i>
-                        </button>
-                </div>
-        </div>
-        <div class="dark_bg_popup" *ngIf="isActiveCreateBlock">
-            <div class="popup_change">
-                    <h5>Create a new Book</h5>
-                    <form class="edit_form" #myForm="ngForm">
-                        <div class="form_group">
-                            <div class="title_block">
-                                <label for="">
-                                    Title
-                                </label>
-                                <br>
-                                <input  class="form-control" 
-                                        name="title" type="text" id="" 
-                                        placeholder="Enter a title"
-                                        autocomplete="off"
-                                        [(ngModel)]="title"
-                                        required>
-                            </div>
-                        </div>
-                        <div class="number_pages_block">
-                            <div class="form_group">
-                                <label for="numberOfPages">Number of pages</label>
-                                <br>
-                                <input class="form-control" 
-                                       name="numberOfPages" 
-                                       type="text" 
-                                       placeholder="Enter number of pages"
-                                       autocomplete="off"
-                                       [(ngModel)]="numberOfPages"
-                                       required
-                                       >
-                            </div>
-                        </div>
-                        <div class="gener_block">
-                            <div class="form-group">
-                                <label for="gener">Gener</label>
-                                <br>
-                                <select class="form-control" 
-                                        [(ngModel)]="generr" 
-                                        (ngModelChange)="isOtherBlockActive($event)"
-                                        name="gener"
-                                        required>
-                                    <option *ngFor="let g of geners">{{ g.gener }}</option>
-                                    <option value="other">Other gener</option>
-                                </select>
-                                <input  type="text"
-                                        id="other_gener" 
-                                        class="form-control"
-                                        name="other-gener"
-                                        placeholder="Enter a gener"
-                                        autocomplete="off"
-                                        [(ngModel)]="otherGener"
-                                        *ngIf="isActiveOtherGener"
-                                        required
-                                >
-                            </div>
-                            <div class="imageBlock">
-                                <label id="file_label" for="upload">Add book cover</label>
-                                <input type="file" id="upload" name="file" accept="image/*" (change)="fileProgress($event)">
-                            </div>
-                        </div>
-                        <div class="submit_block">
-                            <div class="submit_block form_group">
-                                <button class="btn btn-dark"
-                                        (click)="onSubmitNewBook()" 
-                                        type="button">Submit</button>
-                            </div>
-                        </div>
-                    </form>
-                        <button type="button" 
-                            (click)="closeCreateBlock()" 
-                            id="delete">
-                            <i class="fas fa-times"></i>
-                        </button>
-                </div>
-        </div>
-    </div>
+            <app-forms-for-changing-book [arrayBookForChanging]="arrayBook" *ngIf="activeTemplate.isActiveChangeBlock"></app-forms-for-changing-book>
 
+            <app-froms-for-create-book (onsubmit)="onSubmitBook($event)" *ngIf="activeTemplate.isActiveCreateBlock"></app-froms-for-create-book>
+
+    </div>
 </main>

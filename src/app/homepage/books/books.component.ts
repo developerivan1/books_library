@@ -1,9 +1,10 @@
-import {Component, OnInit, OnChanges, Input, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, OnDestroy, OnChanges, Input, Output, EventEmitter} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {NgForm} from '@angular/forms';
 
 import {Book} from '../book.model';
 import {BooksService} from './books.service';
+import { ActiveTemplateService } from '../active-template.service';
 import {SearchPipe} from '../../search.pipe';
 import {FilterPipe} from '../../filter.pipe';
 import { Observable } from 'rxjs';
@@ -12,75 +13,33 @@ import { Observable } from 'rxjs';
   selector: 'app-books',
   templateUrl: './books.component.html',
   styleUrls: ['./books.component.sass'],
+  providers: [
+    BooksService,
+    ActiveTemplateService
+  ]
 })
 
 export class BooksComponent implements OnInit {
-  // Create forms property
-  title: string;
-  numberOfPages: number;
-  generr: string;
-  imageSrc: string;
-  otherGener: string;
-
-  // Property for files
-  fileData: File = null;
-  previewUrl: any = null;
-
-  // Edit forms property
-  id: number;
-  imgSrc: string;
-  title_book_for_edit: string;
-  numberOfPages_for_edit: number;
-  gener_for_edit: string;
-
-  // Active property for template
-  isActiveChangeBlock: boolean;
-  isActiveSearchBlock: boolean;
-  isActiveCreateBlock: boolean;
-  isActiveOtherGener: boolean;
+  @Input() arrayBook: Book;
 
   // Input property
   @Input() term: string;
   @Input() array_of_books: any[] = [];
-  @Input() events: Observable<void>;
   // Gener
 
   public geners = [];
   public selectedGener;
 
-  constructor(private bookService: BooksService) {
+  constructor(private bookService: BooksService,
+              private activeTemplate: ActiveTemplateService) {
   }
 
   // Component iniziallization
   ngOnInit() {
-    this.isActiveSearchBlock = false;
-    this.isActiveChangeBlock = false;
-    this.isActiveCreateBlock = false;
-    this.isActiveOtherGener = false;
     this.selectedGener = 'All books';
     this.getBooks();
     this.getGeners();
   }
-
-  // Methods for reading files
-  fileProgress(fileInput: any) {
-    this.fileData = fileInput.target.files[0] as File;
-    this.preview();
-  }
-
-  preview() {
-    const mimeType = this.fileData.type;
-    if (mimeType.match(/image\/*/) == null) {
-      return;
-    }
-    const reader = new FileReader();
-    reader.readAsDataURL(this.fileData);
-    reader.onload = (event) => {
-      this.previewUrl = reader.result;
-    };
-  }
-
-
   getBooks() {
     this.bookService.getBooks().subscribe(data => this.array_of_books = data);
   }
@@ -90,7 +49,7 @@ export class BooksComponent implements OnInit {
   }
 
   activatedSearchBlock() {
-    this.isActiveSearchBlock = !this.isActiveSearchBlock;
+    this.activeTemplate.isActiveSearchBlock = !this.activeTemplate.isActiveSearchBlock;
   }
 
   // Output events
@@ -102,75 +61,15 @@ export class BooksComponent implements OnInit {
     this.bookService.deleteBook(arrayBook).subscribe();
   }
 
+
   onEditEvent(arrayBook) {
-    this.id = arrayBook.id;
-    if (arrayBook.imageSrc) {
-      this.imgSrc = arrayBook.imageSrc;
-    }
-    this.isActiveChangeBlock = true;
-    this.title_book_for_edit = arrayBook.title;
-    this.numberOfPages_for_edit = arrayBook.numberOfPages;
-    this.gener_for_edit = arrayBook.gener;
+    this.arrayBook = arrayBook;
+    this.activeTemplate.isActiveChangeBlock = true;
   }
-
-  onSubmitChangesEvent() {
-    const putBook = {
-      id: (this.id),
-      title: this.title_book_for_edit,
-      numberOfPages: this.numberOfPages_for_edit,
-      gener: this.gener_for_edit,
-      imageSrc: this.imgSrc
-    };
-    this.array_of_books.map((item, i) => {
-      if (item.id === putBook.id) {
-        const index = this.array_of_books.indexOf(item);
-        this.array_of_books.splice(index, 1, putBook);
-      }
-    });
-    this.bookService.updateBook(putBook).subscribe();
-    this.isActiveChangeBlock = false;
-
+  activeCreateForm() {
+    this.activeTemplate.isActiveCreateBlock = true;
   }
-  onSubmitNewBook() {
-    let g;
-    if (this.title.length !== 0 && this.numberOfPages !== 0 && this.generr !== undefined || null ) {
-      if (this.otherGener !== null || undefined ) {
-        const allGeners: string[] = this.geners.map((item) => {
-          return item.gener;
-        });
-        if (allGeners.includes(this.otherGener)) {
-          return;
-        } else {
-        this.geners.push({ id: this.geners.length + 1, gener: this.otherGener});
-        this.bookService.createGener({ id: this.geners.length + 1, gener: this.otherGener}).subscribe();
-        g = this.otherGener;
-        }
-        } else {
-          g = this.generr;
-        }
-      }
-    const newBook: Book = {
-      id: (this.array_of_books.length + 1),
-      title: this.title,
-      numberOfPages: this.numberOfPages,
-      gener: g,
-      imageSrc: this.previewUrl};
-      this.bookService.createBook(newBook).subscribe();
-      this.array_of_books.push(newBook);
-      this.isActiveCreateBlock = false;
-    }
-  closeEditBlock() {
-    this.isActiveChangeBlock = false;
-  }
-  closeCreateBlock() {
-    this.isActiveCreateBlock = false;
-  }
-
-  isOtherBlockActive(event) {
-    if (event == 'other') {
-      this.isActiveOtherGener = !this.isActiveOtherGener;
-    } else {
-      this.isActiveOtherGener = false;
-    }
+  onSubmitBook(event) {
+    this.array_of_books.push(event);
   }
 }

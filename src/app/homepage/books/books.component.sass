@@ -109,46 +109,7 @@ main
     .row
         position: relative
         
-.dark_bg_popup
-    position: absolute
-    left: 0
-    top: 0
-    bottom: 0
-    right: 0
-    background: rgba(0, 0, 0, 0.7)
-    transition: all .3s ease-in-out
-    z-index: 1000
-    .popup_change
-        position: absolute
-        left: 50%
-        top: 50%
-        transform: translate(-50%, -50%)
-        width: 30%
-        height: auto
-        background-color: #fff
-        border-radius: 30px
-        padding: 30px
-        animation: changeBlockAnimation .3s ease
-        #delete
-            background: none
-            border: none
-            color: #3a3a3a
-            margin-right: 7px
-            outline: none
-            font-size: 20px
-            position: absolute
-            right: 15px
-            top: 15px
-            &:hover
-                transform: scale(1.2)
-                transition: transform .3s ease
-        h5 
-            height: 30px
-            display: flex
-            justify-content: center
-            align-items: center
-            color: #474747
-            padding-bottom: 30px
+
 .hoster_book::-webkit-scrollbar
     width: 15px
 .hoster_book::-webkit-scrollbar-track
@@ -156,35 +117,7 @@ main
 .hoster_book::-webkit-scrollbar-thumb
     background: #5e5e5e    
 
-.form_group
-    margin: 20px 0
-.submit_block
-    width: 100%
-    height: 100%
-    display: flex
-    justify-content: center
 
-input[type=file]
-    display: none
-.imageBlock
-    display: flex
-    align-items: center
-    justify-content: center
-    padding: 15px 0
-    #file_label
-        width: 140px
-        height: 40px
-        border-bottom: 2px solid #a5a5a5 
-        display: flex
-        justify-content: center
-        align-items: center
-        cursor: pointer
-        color: #363636
-        &:hover
-            width: 100%
-            transition: .3s all ease
-#other_gener
-    margin: 15px 0
 
 // Animations
 @keyframes changeBlockAnimation

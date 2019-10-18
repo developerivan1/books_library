@@ -10,8 +10,8 @@ export class FilterPipe implements PipeTransform {
       return array_of_books;
     }
     return array_of_books.filter((item) => {
-      return item.gener.includes(selectedGener)
-    })
+      return item.gener.includes(selectedGener);
+    });
   }
 
 }
