@@ -34,7 +34,7 @@
 
             </div>
         </div>
-            <app-forms-for-changing-book [arrayBookForChanging]="arrayBook" *ngIf="activeTemplate.isActiveChangeBlock"></app-forms-for-changing-book>
+            <app-forms-for-changing-book [arrayBookForChanging]="arrayBook" (onsubmit)="onSubmitCreateEvent($event)" *ngIf="activeTemplate.isActiveChangeBlock"></app-forms-for-changing-book>
 
             <app-froms-for-create-book (onsubmit)="onSubmitBook($event)" *ngIf="activeTemplate.isActiveCreateBlock"></app-froms-for-create-book>
 

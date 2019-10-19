@@ -1,12 +1,10 @@
-import {Component, OnInit, OnDestroy, OnChanges, Input, Output, EventEmitter} from '@angular/core';
-import {FormsModule} from '@angular/forms';
-import {NgForm} from '@angular/forms';
+import { Component, OnInit, OnDestroy, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 
-import {Book} from '../book.model';
-import {BooksService} from './books.service';
+import { Book } from '../book.model';
+import { BooksService } from './books.service';
 import { ActiveTemplateService } from '../active-template.service';
-import {SearchPipe} from '../../search.pipe';
-import {FilterPipe} from '../../filter.pipe';
+import { SearchPipe } from '../../search.pipe';
+import { FilterPipe } from '../../filter.pipe';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -71,5 +69,8 @@ export class BooksComponent implements OnInit {
   }
   onSubmitBook(event) {
     this.array_of_books.push(event);
+  }
+  onSubmitCreateEvent(event) {
+    console.log(event);
   }
 }

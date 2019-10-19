@@ -1,4 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
 import { BooksService } from '../books.service';
 import { ActiveTemplateService } from '../../active-template.service';
 import { Book } from '../../book.model';
@@ -9,66 +11,90 @@ import { Book } from '../../book.model';
   styleUrls: ['./froms-for-create-book.component.sass']
 })
 export class FromsForCreateBookComponent implements OnInit {
-  // Create forms property
-  title: string;
-  numberOfPages: number;
-  generr: string;
-  imageSrc: string;
-  otherGener: string;
 
+  reactiveFormForCreateBook: FormGroup;
   isActiveOtherGener = false;
+
   @Output() onsubmit = new EventEmitter();
+
   // Property for files
   fileData: File = null;
   previewUrl: any = null;
   allBooks: Book[] = [];
   geners = [];
+
   constructor(private bookService: BooksService,
-              private activeTemplate: ActiveTemplateService) { }
+              private activeTemplate: ActiveTemplateService,
+              private fb: FormBuilder) { }
 
   ngOnInit() {
     this.getGeners();
     this.getBooks();
+    this.initForm();
   }
+
+  initForm() {
+    this.reactiveFormForCreateBook = this.fb.group({
+      title: ['', [
+        Validators.required
+       ]
+      ],
+      numberOfPages: [0, [
+        Validators.required,
+        Validators.pattern(/\d/i)
+       ]
+      ],
+      gener: ['', [
+        Validators.required
+       ]
+      ],
+      otherGener: [null]
+     });
+    }
+
+  isControlInvalid(controlName: string): boolean {
+    const control = this.reactiveFormForCreateBook.controls[controlName];
+    const result = control.invalid && control.touched;
+    return result;
+  }
+
   getGeners() {
     this.bookService.getGeners().subscribe(data => this.geners = data);
   }
+
   getBooks() {
     this.bookService.getBooks().subscribe(data => this.allBooks = data);
   }
-  onSubmitNewBook() {
+
+  onSubmit() {
+    // debugger;
+    const controls = this.reactiveFormForCreateBook.controls;
     let g;
-    if (this.title.length !== 0 && this.numberOfPages !== 0 && this.generr !== undefined || null ) {
-      if (this.otherGener !== null || undefined) {
-        const allGeners: string[] = this.geners.map((item) => {
-          return item.gener;
-        });
-        if (allGeners.includes(this.otherGener)) {
-          return false;
-        } else {
-        this.geners.push({ id: this.geners.length + 1, gener: this.otherGener});
-        this.bookService.createGener({ id: this.geners.length + 1, gener: this.otherGener}).subscribe();
-        g = this.otherGener;
-        console.log('Other gener - ' + g);
-        }
-        } else {
-          console.log('Selected gener - ' + g);
-          g = this.generr;
-        }
-      }
-    const newBook: Book = {
-      id: (this.allBooks.length + 1),
-      title: this.title,
-      numberOfPages: this.numberOfPages,
+    if (this.reactiveFormForCreateBook.invalid) {
+      Object.keys(controls)
+      .forEach(controlName => controls[controlName].markAsTouched());
+      console.log('Wooops');
+      return;
+    }
+    if (controls.otherGener.value !== null && controls.gener.value === 'other') {
+      this.bookService.createGener({ id: this.geners.length + 1, gener: controls.otherGener.value}).subscribe();
+      g = controls.otherGener.value;
+    } else {
+      g = controls.gener.value;
+    }
+    const obj: Book = {
+      id: this.allBooks.length + 1,
+      title: controls.title.value,
+      numberOfPages: controls.numberOfPages.value,
       gener: g,
       imageSrc: this.previewUrl
     };
-    this.bookService.createBook(newBook).subscribe();
-    this.activeTemplate.isActiveCreateBlock = false;
-    this.onsubmit.emit(newBook);
-    }
+    this.bookService.createBook(obj).subscribe();
+    this.closeCreateBlock();
+    this.onsubmit.emit(obj);
+  }
 
-     // Methods for reading files
+  // Methods for reading files
   fileProgress(fileInput: any) {
     this.fileData = fileInput.target.files[0] as File;
     this.preview();

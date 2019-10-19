@@ -1,6 +1,6 @@
 <div class="popup_change">
     <h5>Create a new Book</h5>
-    <form class="edit_form" #myForm="ngForm">
+    <form class="edit_form" [formGroup]="reactiveFormForCreateBook" (submit)="onSubmit()">
         <div class="form_group">
             <div class="title_block">
                 <label for="">
@@ -8,11 +8,13 @@
                 </label>
                 <br>
                 <input  class="form-control" 
-                        name="title" type="text" id="" 
+                        name="title" 
+                        type="text" 
+                        formControlName="title"
                         placeholder="Enter a title"
                         autocomplete="off"
-                        [(ngModel)]="title"
                         required>
+                <small *ngIf="isControlInvalid('title')" class="notEmpty">The field cannot be empty</small>
             </div>
         </div>
         <div class="number_pages_block">
@@ -24,9 +26,9 @@
                        type="text" 
                        placeholder="Enter number of pages"
                        autocomplete="off"
-                       [(ngModel)]="numberOfPages"
-                       required
-                       >
+                       formControlName="numberOfPages"
+                       required>
+                <small *ngIf="isControlInvalid('numberOfPages')" class="notEmpty">The field cannot be empty and the value must be numeric</small>
             </div>
         </div>
         <div class="gener_block">
@@ -34,7 +36,7 @@
                 <label for="gener">Gener</label>
                 <br>
                 <select class="form-control" 
-                        [(ngModel)]="generr" 
+                        formControlName="gener"
                         (ngModelChange)="isOtherBlockActive($event)"
                         name="gener"
                         required>
@@ -47,7 +49,7 @@
                         name="other-gener"
                         placeholder="Enter a gener"
                         autocomplete="off"
-                        [(ngModel)]="otherGener"
+                        formControlName="otherGener"
                         *ngIf="isActiveOtherGener"
                         required
                 >
@@ -59,9 +61,8 @@
         </div>
         <div class="submit_block">
             <div class="submit_block form_group">
-                <button class="btn btn-dark"
-                        (click)="onSubmitNewBook($event)" 
-                        type="button">Submit</button>
+                <button class="btn btn-dark" 
+                        type="submit">Submit</button>
             </div>
         </div>
     </form>
