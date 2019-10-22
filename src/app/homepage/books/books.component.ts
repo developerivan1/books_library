@@ -18,8 +18,8 @@ import { Observable } from 'rxjs';
 })
 
 export class BooksComponent implements OnInit {
-  @Input() arrayBook: Book;
 
+  @Input() arrayBook: Book;
   // Input property
   @Input() term: string;
   @Input() array_of_books: any[] = [];
@@ -27,16 +27,22 @@ export class BooksComponent implements OnInit {
 
   public geners = [];
   public selectedGener;
+  public isActiveCreateBlock: boolean;
 
   constructor(private bookService: BooksService,
               private activeTemplate: ActiveTemplateService) {
-  }
+                activeTemplate.isA.subscribe( bool => {
+                  this.isActiveCreateBlock = bool;
+                  console.log(bool);
+                });
+              }
 
   // Component iniziallization
   ngOnInit() {
     this.selectedGener = 'All books';
     this.getBooks();
     this.getGeners();
+
   }
   getBooks() {
     this.bookService.getBooks().subscribe(data => this.array_of_books = data);
@@ -64,13 +70,13 @@ export class BooksComponent implements OnInit {
     this.arrayBook = arrayBook;
     this.activeTemplate.isActiveChangeBlock = true;
   }
-  activeCreateForm() {
-    this.activeTemplate.isActiveCreateBlock = true;
-  }
   onSubmitBook(event) {
     this.array_of_books.push(event);
   }
   onSubmitCreateEvent(event) {
     console.log(event);
+  }
+  onCreate() {
+    this.activeTemplate.setBoolCreateBlock(true);
   }
 }

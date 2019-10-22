@@ -36,7 +36,10 @@
         </div>
             <app-forms-for-changing-book [arrayBookForChanging]="arrayBook" (onsubmit)="onSubmitCreateEvent($event)" *ngIf="activeTemplate.isActiveChangeBlock"></app-forms-for-changing-book>
 
-            <app-froms-for-create-book (onsubmit)="onSubmitBook($event)" *ngIf="activeTemplate.isActiveCreateBlock"></app-froms-for-create-book>
+            <app-froms-for-create-book (onsubmit)="onSubmitBook($event)" *ngIf="isActiveCreateBlock"></app-froms-for-create-book>
 
     </div>
 </main>
+    <a class="hover_title" (click)="onCreate()"  data-title="Add book" id="add">
+        <i class="fas fa-plus-circle"></i>
+    </a>

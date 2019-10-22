@@ -119,6 +119,6 @@ export class FromsForCreateBookComponent implements OnInit {
     }
   }
   closeCreateBlock() {
-    this.activeTemplate.isActiveCreateBlock = false;
+    this.activeTemplate.setBoolCreateBlock(false);
   }
 }

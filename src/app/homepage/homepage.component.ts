@@ -1,6 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { BooksService } from './books/books.service';
-import { BooksComponent } from './books/books.component';
 import { ActiveTemplateService } from './active-template.service';
 
 @Component({
@@ -10,13 +9,9 @@ import { ActiveTemplateService } from './active-template.service';
 })
 
 export class HomepageComponent {
-  @ViewChild(BooksComponent, {static: false})
-  private booksComponent: BooksComponent;
-  constructor(private bookService: BooksService,
-              private activeTemplate: ActiveTemplateService) { }
 
-  onCreate() {
-    this.booksComponent.activeCreateForm();
-  }
+  constructor(private bookService: BooksService,
+              private activeTemplate: ActiveTemplateService) {}
+
 
 }
