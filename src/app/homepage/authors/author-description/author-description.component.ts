@@ -11,6 +11,7 @@ export class AuthorDescriptionComponent implements OnInit {
   @Output() onsubmit = new EventEmitter();
 
   @Input() author: Author;
+
   public updatedAuthor: Author;
   public fullName: string;
   public date: string;

@@ -1,5 +1,5 @@
 <div class="cont">
-    <div class="darker_bg_for_active_desc" (click)="closeAuthorDesc()" *ngIf="isActiveAuthorDesc">
+    <div class="darker_bg_for_active_desc" *ngIf="isActiveAuthorDesc">
         <app-author-description (onsubmit)="onSubmitEdit($event)" [author]="author"></app-author-description>        
     </div>
     <div class="darker_bg_for_active_desc" *ngIf="isActiveCreateAuthor">
