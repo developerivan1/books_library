@@ -1,0 +1,151 @@
+:host
+    padding: 30px
+    width: 50%
+    min-width: 710px
+    height: 600px
+    overflow: auto
+    background: #fff
+    position: relative
+    animation: initAnimation .3s ease
+    z-index: 1000
+:host::-webkit-scrollbar
+    width: 15px
+:host::-webkit-scrollbar-track
+    background: #a5a5a5
+:host::-webkit-scrollbar-thumb
+    background: #5e5e5e
+.top_part
+    display: grid
+    grid-template-columns: 260px 1fr
+    position: relative
+    .top_right_infoblock
+        padding-left: 15px
+    .photo
+        width: 260px
+    .name h4
+        color: #5e5e5e
+        height: 40px
+    .birth
+        padding-top: 15px
+        font-size: 18px
+        color: #5e5e5e
+        display: flex
+        justify-content: space-between
+        align-items: center
+        border-bottom: 1px solid #d8d8d8
+        height: 50px
+    .bibliography
+        p
+            height: 50px
+            display: flex
+            justify-content: flex-start
+            align-items: center
+            font-size: 18px
+            color: #5e5e5e
+        ul 
+            list-style: none
+            padding: 0
+            position: relative
+            li 
+                width: 100%
+                height: 40px
+                background: #5e5e5e
+                margin: 10px 0
+                position: relative
+                padding: 0 15px 0 30px
+                display: flex
+                justify-content: space-between
+                align-items: center
+                color: #fff
+                .closee
+                    cursor: pointer
+            li::before
+                content: ''
+                position: absolute
+                left: 0
+                top: 0
+                bottom: 0
+                width: 10px
+                background: #9c9c9c
+                    
+.top-right-btn-group
+    position: absolute
+    right: 30px
+    top: 30px
+    cursor: pointer
+    width: 60px
+    display: flex
+    justify-content: space-between
+    .closee, .edit 
+        font-size: 18px
+        color: #5e5e5e
+        &:hover
+            transform: scale(1.1)
+            transition: .3s all ease
+.author_name
+    margin: 0
+    padding: 0
+    color: #5e5e5e
+.edit-input
+    width: 100%
+    display: block
+    height: 40px
+    padding-left: 15px
+    outline: none
+    border-radius: 5px
+    border: 1px solid green
+.btn-group
+    display: flex
+    flex-direction: column
+    button
+        margin: 10px 0
+.newBook
+    position: fixed
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+    width: 600px
+    height: 150px
+    background: #3f3f3f
+    border: 2px solid #dbdbdb
+    padding: 15px
+    z-index: 10000
+    animation: newBookanimation .3s ease
+    h5
+        height: 40px
+        display: flex
+        justify-content: center
+        align-items: center
+        color: #dbdbdb
+.closeNewBookBlock
+    position: absolute
+    right: 15px
+    top: 15px
+    cursor: pointer
+    i 
+        color: #dbdbdb
+        font-size: 18px
+label
+    margin-top: 15px
+.invalid
+    border: 1px solid red
+small
+    color: red
+    display: block
+h4 
+    color: #5e5e5e
+@keyframes initAnimation
+    0%
+        transform: translateY(100%)
+        opacity: 0
+    100%
+        transform: translateY(0)
+        opacity: 1
+@keyframes newBookanimation
+    0%
+        top: 100%
+        opacity: 0
+    100%
+        top: 50%
+        opacity: 1
+    

@@ -1,0 +1,83 @@
+<div class="popup_change">
+    <h5>Create a new Book</h5>
+    <form class="edit_form" [formGroup]="reactiveFormForCreateAuthor" (submit)="onSubmit()">
+        <div class="row">
+            <div class="form_group col">
+                <div class="name_block">
+                    <label for="name">
+                        Name
+                    </label>
+                    <br>
+                    <input class="form-control" id="name" name="name" type="text" formControlName="name"
+                        placeholder="Enter author name" autocomplete="off" required>
+                    <small *ngIf="isControlInvalid('name')" class="notEmpty">The field cannot be empty</small>
+                </div>
+            </div>
+            <div class="form_group col">
+                <div class="patronymic_block">
+                    <label for="patronumic">Patronymic</label>
+                    <br>
+                    <input class="form-control" name="patronynic" id="patronymic" type="text"
+                        placeholder="Enter author patronymic" autocomplete="off" formControlName="patronymic">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col">
+                <div class="surename_block">
+                    <label for="surename">Surename</label>
+                    <br>
+                    <input class="form-control" id="surename" name="surename" type="text"
+                        placeholder="Enter author surename" autocomplete="off" formControlName="surename" required>
+                    <small *ngIf="isControlInvalid('surename')" class="notEmpty">The field cannot be empty</small>
+                </div>
+            </div>
+            <div class="form_group col">
+                <div class="birth_block">
+                    <label for="birth">Birthday</label>
+                    <br>
+                    <input class="form-control" name="birth" id="birth" type="text" placeholder="Enter author birthday"
+                        autocomplete="off" formControlName="birth" required>
+                    <small *ngIf="isControlInvalid('birth')" class="notEmpty">Inccorect date. Example: "12 April
+                        2019"</small>
+                </div>
+            </div>
+        </div>
+        <div class="bibliography">
+            <p>Bibliography</p>
+            <button class="add_book" (click)="activeNewBook()" type="button"><i class="fas fa-plus"></i></button>
+            <ul>
+                <li *ngFor="let book of books; let i = index">
+                    {{ book }}
+                    <a class="closee" (click)="deleteBook(i)">
+                        <i class="fas fa-times"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="imageBlock">
+            <label id="file_label" for="upload">Add author photo</label>
+            <input type="file" id="upload" name="file" accept="image/*" (change)="fileProgress($event)">
+        </div>
+        <div class="submit_block">
+            <div class="submit_block form_group">
+                <button [disabled]="isSubmitBtnDisabled" class="btn btn-dark" type="submit">Submit</button>
+            </div>
+        </div>
+    </form>
+    <button type="button" (click)="closeThisComponent()" id="delete">
+        <i class="fas fa-times"></i>
+    </button>
+</div>
+<div class="newBook" *ngIf="isActiveNewBook">
+    <h5>New book</h5>
+    <div class="input-group mb-3">
+        <input type="text" [(ngModel)]="newBookStr" class="form-control" placeholder="Enter a book title">
+        <div class="input-group-append">
+            <button (click)="addBook()" class="btn btn-outline-secondary btn-light" type="button">Add</button>
+        </div>
+    </div>
+    <a class="closeNewBookBlock" (click)="closeNewBook()">
+        <i class="fas fa-times"></i>
+    </a>
+</div>

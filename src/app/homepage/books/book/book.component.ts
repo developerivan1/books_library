@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { BooksService } from '../books.service';
+import { BooksService } from '../../../../services/books.service';
 import { Book } from '../../book.model';
 
 @Component({

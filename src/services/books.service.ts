@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
-import { Book } from '../book.model';
-import { Author } from '../author.model';
+import { Author } from '../app/homepage/author.model';
+import { Book } from '../app/homepage/book.model';
 import { Observable } from 'rxjs';
 
 @Injectable()
@@ -11,17 +10,13 @@ export class BooksService {
 
   // Urls for http
   private apiUrlBooks = 'http://localhost:4200/api/booksArray';
-  private apiUrlAuthors = 'http://localhost:4200/api/authors';
   private apiUrlGeners = 'http://localhost:4200/api/geners';
+  private apiUrlAuthors = 'http://localhost:4200/api/authors';
 
   constructor(private http: HttpClient) {}
 
   getBooks(): Observable<Book[]> {
     return this.http.get<Book[]>(`${this.apiUrlBooks}`);
-  }
-
-  getAuthors(): Observable<Author[]> {
-    return this.http.get<Author[]>(`${this.apiUrlAuthors}`);
   }
 
   getGeners(): Observable<string[]> {
@@ -42,6 +37,16 @@ export class BooksService {
 
   createGener(gener) {
     return this.http.post(`${this.apiUrlGeners}`, gener);
+  }
+
+  getAuthors(): Observable<Author[]> {
+    return this.http.get<Author[]>(`${this.apiUrlAuthors}`);
+  }
+  updateAuthor(author) {
+    return this.http.put(`${this.apiUrlAuthors}/${author.id}`, author);
+  }
+  createAuthor(author) {
+    return this.http.post(`${this.apiUrlAuthors}`, author);
   }
 
 }

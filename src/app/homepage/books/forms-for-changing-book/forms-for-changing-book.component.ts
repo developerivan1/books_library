@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import { BooksService } from '../books.service';
+import { BooksService } from '../../../../services/books.service';
 import { Book } from '../../book.model';
-import { ActiveTemplateService } from '../../active-template.service';
+import { ActiveTemplateService } from '../../../../services/active-template.service';
 
 @Component({
   selector: 'app-forms-for-changing-book',

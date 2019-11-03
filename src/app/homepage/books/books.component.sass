@@ -147,7 +147,9 @@ main
     color: #dbdbdb
     animation: navTitle .3s ease-in-out
     opacity: 1
-
+.host
+    display: flex
+    justify-content: center
 // Animations
 @keyframes changeBlockAnimation
     0%
@@ -181,3 +183,8 @@ main
         transform: translateX(0)
         transform: translateY(-50%)
         opacity: 1
+@media screen and ( max-width: 480px )
+    .hoster_book::-webkit-scrollbar-track
+        background: transparent
+    .hoster_book::-webkit-scrollbar-thumb
+        background: transparent  

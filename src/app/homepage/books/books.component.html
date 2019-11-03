@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="container_fluid hoster_book">
-            <div class="row">
+            <div class="row host">
                 <book *ngFor="let item of array_of_books | search:term | filter:selectedGener"
                       (onsubmitChanges)="onSubmitChangesEvent($event)"
                       (ondelete)="onDeleteEvent($event)"

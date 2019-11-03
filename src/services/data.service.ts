@@ -1,6 +1,6 @@
 import {InMemoryDbService} from 'angular-in-memory-web-api';
-import {Book} from '../book.model';
-import {Author} from '../author.model';
+import {Book} from '../app/homepage/book.model';
+import {Author} from '../app/homepage/author.model';
 
 export class ImMemoryDataService implements InMemoryDbService {
   createDb() {
@@ -148,9 +148,10 @@ export class ImMemoryDataService implements InMemoryDbService {
 
     const authors: Author[] = [
       {
+        id: 0,
         surename: 'Rowling',
         name: 'Joanne',
-        birth: new Date('Jule 31, 1965'),
+        birth: new Date(1965, 5, 23),
         books: [
           'Harry Potter and the Philosophers Stone',
           'Harry Potter and the Chamber of Secrets',
@@ -159,12 +160,14 @@ export class ImMemoryDataService implements InMemoryDbService {
           'Harry Potter and the Order of the Phoenix',
           'Harry Potter and the Half-Blood Prince',
           'Harry Potter and the Deathly Hallows'
-        ]
+        ],
+        url: 'https://hpmedia.bloomsbury.com/rep/files/shot-c-021_withcredit_4001.png'
       },
       {
+        id: 1,
         surename: 'King',
         name: 'Stephen',
-        birth: new Date('September 21, 1947'),
+        birth: new Date( 1947, 8, 21 ),
         books: [
           'It',
           'Outsider',
@@ -172,12 +175,14 @@ export class ImMemoryDataService implements InMemoryDbService {
           'Pet cemetery',
           'Happy Country',
           'Needed Things'
-        ]
+        ],
+        url: 'https://images.gr-assets.com/authors/1362814142p8/3389.jpg'
       },
       {
+        id: 2,
         surename: 'Remark',
         name: 'Erich',
-        birth: new Date('June 22, 1898'),
+        birth: new Date(1898, 6, 22),
         books: [
           'Arc de Triomphe',
           'Three Comrades',
@@ -185,12 +190,14 @@ export class ImMemoryDataService implements InMemoryDbService {
           'The Black Obelisk',
           'Heaven Has No Favorites',
           'Flotsam'
-        ]
+        ],
+        url: 'http://2.bp.blogspot.com/_ecJZf4mc-_I/TCDe8_ZoM6I/AAAAAAAAAA8/vfr2MEJJmp8/s1600/remarque.jpg'
       },
       {
+        id: 3,
         surename: 'Hemingway',
         name: 'Ernest',
-        birth: new Date('July 21, 1899'),
+        birth: new Date(1988, 5, 21),
         books: [
           'Goodbye weapon',
           'Winner Take Nothing',
@@ -200,13 +207,15 @@ export class ImMemoryDataService implements InMemoryDbService {
           'For Whom the Bell Tolls',
           'The Sun Also Rises',
           'The Old Man and The Sea'
-        ]
+        ],
+        url: 'https://karsh.org/wordpress/wp-content/uploads/2016/10/Yousuf-Karsh-Ernest-Hemingway-1957-1558x1960.jpg'
       },
       {
+        id: 4,
         surename: 'Булгаков',
         name: 'Михаил',
         patronymic: 'Афана́сьевич',
-        birth: new Date('May 15, 1891'),
+        birth: new Date(1891, 3, 12),
         books: [
           'Мастер и Маргарита',
           'Записки юного врача (сборник)',
@@ -214,7 +223,8 @@ export class ImMemoryDataService implements InMemoryDbService {
           'Собачье сердце',
           'Морфий',
           'Белая Гвардия',
-        ]
+        ],
+        url: 'https://img.rg.ru/pril/article/133/91/16/bul.jpg'
       },
     ];
 

@@ -1,8 +1,8 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { BooksService } from '../books.service';
-import { ActiveTemplateService } from '../../active-template.service';
+import { BooksService } from '../../../../services/books.service';
+import { ActiveTemplateService } from '../../../../services/active-template.service';
 import { Book } from '../../book.model';
 
 @Component({

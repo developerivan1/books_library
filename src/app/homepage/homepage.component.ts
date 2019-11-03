@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { BooksService } from './books/books.service';
-import { ActiveTemplateService } from './active-template.service';
+import { BooksService } from '../../services/books.service';
+import { ActiveTemplateService } from '../../services/active-template.service';
 
 @Component({
   selector: 'app-homepage',

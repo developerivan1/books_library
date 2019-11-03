@@ -1,0 +1,63 @@
+    <div class="top_part">
+        <div class="left_part">
+            <img class="photo" [src]="author.url" alt="stephen king">
+            <div class="btn-group" *ngIf="editAuthor">
+                <button class="btn btn-dark last" (click)="activatedNewBook()">Add book</button>
+            </div>
+        </div>
+        <div class="top_right_infoblock">
+            <div class="name" *ngIf="descAuthor">
+                <h4>{{ author.name }} {{ author.patronymic }} {{ author.surename }}</h4>
+            </div>
+            <h4 *ngIf="editAuthor">Edit auhtor profile</h4>
+            <label *ngIf="editAuthor" for="author_name">Name:</label>
+            <input *ngIf="editAuthor" id="author_name" type="text" class="edit-input first" [ngClass]="{'invalid': invalidName}" (change)="checkEmptyName()" [(ngModel)]="author.name"  required>
+            <small *ngIf="invalidName">The field must not be empty</small>
+            <label *ngIf="editAuthor" for="author_patronymic">Patronymic:</label>
+            <input *ngIf="editAuthor" id="author_patronymic" type="text" class="edit-input" [(ngModel)]="author.patronymic">
+            <label *ngIf="editAuthor" for="author_surename">Surename:</label>
+            <input *ngIf="editAuthor" id="author_surename" type="text" class="edit-input" [ngClass]="{'invalid': invalidSurename}" (change)="checkEmptySurename()" [(ngModel)]="author.surename" required>
+            <small *ngIf="invalidSurename">The field must not be empty</small>
+            <div class="birth" *ngIf="descAuthor">
+                <span>Birthday:</span> <span>{{ author.birth | date:'dd MMMM yyyy' }}</span>
+            </div>
+            <label *ngIf="editAuthor" for="author_birth">Birthday:</label>
+            <input id="author_birth" type="text" [ngClass]="{'invalid': invalidDate}" (change)="checkEmptyDate()" [(ngModel)]="date" *ngIf="editAuthor" class="edit-input" required>
+            <small class="invalid_date_small" *ngIf="dateEmpty">The field must not be empty</small>
+            <small class="invalid_date_small" *ngIf="invalidDate">Incorrect date. Example: "12 April 2010"</small>
+            <div class="bibliography">
+                <p>Bibliography</p>
+                <ul>
+                    <li *ngFor="let book of books; let i = index">
+                        {{ book }}
+                        <a class="closee" (click)="deleteBook(i)" *ngIf="editAuthor">
+                            <i class="fas fa-times"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="submit_block"  (click)="onSubmitEdit()" *ngIf="editAuthor">
+                <button [disabled]="invalid" class="btn btn-dark">Submit</button>
+            </div>
+        </div>
+    </div>
+    <div class="top-right-btn-group">
+        <a class="edit" (click)="toggleEdit()">
+            <i class="far fa-edit"></i>
+        </a>
+        <a class="closee" (click)="closeComponent()">
+            <i class="fas fa-times"></i>
+        </a>
+    </div>
+    <div class="newBook" *ngIf="isActiveNewBook">
+        <h5>New book</h5>
+        <div class="input-group mb-3">
+            <input type="text" [(ngModel)]="newBookStr" class="form-control" placeholder="Enter a book title">
+            <div class="input-group-append">
+                <button (click)="addBook()" class="btn btn-outline-secondary btn-light" type="button">Add</button>
+            </div>
+        </div>
+        <a class="closeNewBookBlock" (click)="closeNewBook()">
+            <i class="fas fa-times"></i>
+        </a>
+    </div>

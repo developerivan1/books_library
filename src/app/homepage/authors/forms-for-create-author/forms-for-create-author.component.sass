@@ -1,0 +1,153 @@
+:host
+    position: absolute
+    left: 0
+    top: 0
+    bottom: 0
+    right: 0
+    background: rgba(0, 0, 0, 0.7)
+    transition: all .3s ease-in-out
+    z-index: 1000
+    .popup_change
+        position: absolute
+        left: 50%
+        top: 50%
+        transform: translate(-50%, -50%)
+        min-width: 600px
+        width: 50%
+        height: auto
+        background-color: #fff
+        border-radius: 30px
+        padding: 30px
+        animation: changeBlockAnimation .3s ease
+        #delete
+            background: none
+            border: none
+            color: #3a3a3a
+            margin-right: 7px
+            outline: none
+            font-size: 20px
+            position: absolute
+            right: 15px
+            top: 15px
+            &:hover
+                transform: scale(1.2)
+                transition: transform .3s ease
+        h5
+            height: 30px
+            display: flex
+            justify-content: center
+            align-items: center
+            color: #474747
+            padding-bottom: 30px
+input[type=file]
+            display: none
+.imageBlock
+    display: flex
+    align-items: center
+    justify-content: center
+    padding: 15px 0
+    #file_label
+        width: 140px
+        height: 40px
+        border-bottom: 2px solid #a5a5a5
+        display: flex
+        justify-content: center
+        align-items: center
+        cursor: pointer
+        color: #363636
+        &:hover
+            width: 100%
+            transition: .3s all ease
+#other_gener
+    margin: 15px 0
+
+.submit_block
+    width: 100%
+    height: 100%
+    display: flex
+    justify-content: center
+
+input.ng-touched.ng-invalid
+    border-color: #ff0000
+.notEmpty
+    color: #ff0000
+    padding-left: 5px
+label
+    margin-top: 30px
+.add_book
+    width: 40px
+    height: 40px
+    background: #363636
+    border: 0
+    i
+        color: #fff
+        font-size: 18px
+    &:hover
+        background: #949494
+        transition: .3s all ease
+.newBook
+    position: fixed
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+    width: 600px
+    height: 150px
+    background: #3f3f3f
+    border: 2px solid #dbdbdb
+    padding: 15px
+    z-index: 10000
+    animation: newBookanimation .3s ease
+    h5
+        height: 40px
+        display: flex
+        justify-content: center
+        align-items: center
+        color: #dbdbdb
+.closeNewBookBlock
+    position: absolute
+    right: 15px
+    top: 15px
+    cursor: pointer
+    i
+        color: #dbdbdb
+        font-size: 18px
+
+.bibliography p
+    height: 50px
+    display: flex
+    justify-content: flex-start
+    align-items: center
+    font-size: 18px
+    color: #5e5e5e
+ul
+    list-style: none
+    padding: 0
+    position: relative
+    li
+        width: 100%
+        height: 40px
+        background: #5e5e5e
+        margin: 10px 0
+        position: relative
+        padding: 0 15px 0 30px
+        display: flex
+        justify-content: space-between
+        align-items: center
+        color: #fff
+        .closee
+            cursor: pointer
+    li::before
+        content: ''
+        position: absolute
+        left: 0
+        top: 0
+        bottom: 0
+        width: 10px
+        background: #9c9c9c
+@keyframes newBookanimation
+    0%
+    top: 100%
+        opacity: 0
+    100%
+    top: 50%
+        opacity: 1

@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 
 import { Book } from '../book.model';
-import { BooksService } from './books.service';
-import { ActiveTemplateService } from '../active-template.service';
+import { BooksService } from '../../../services/books.service';
+import { ActiveTemplateService } from '../../../services/active-template.service';
 import { SearchPipe } from '../../search.pipe';
 import { FilterPipe } from '../../filter.pipe';
 import { Observable } from 'rxjs';
@@ -33,7 +33,6 @@ export class BooksComponent implements OnInit {
               private activeTemplate: ActiveTemplateService) {
                 activeTemplate.isA.subscribe( bool => {
                   this.isActiveCreateBlock = bool;
-                  console.log(bool);
                 });
               }
 
