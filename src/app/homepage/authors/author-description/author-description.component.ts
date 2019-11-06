@@ -101,7 +101,6 @@ export class AuthorDescriptionComponent implements OnInit {
                                   url: this.author.url };
     this.bookService.updateAuthor(resultAuthor).subscribe();
     this.activeTemplate.setBoolEditAuthor(false);
-    this.onsubmit.emit(resultAuthor);
   }
 
   checkEmptyName() {

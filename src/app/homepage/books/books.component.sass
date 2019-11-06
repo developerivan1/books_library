@@ -23,7 +23,6 @@ main
     animation: initialized2 .5s ease
     overflow: hidden
     position: relative
-
     .darker_bg
         display: grid
         grid-template-rows: 35px 60px 1fr
@@ -149,7 +148,7 @@ main
     opacity: 1
 .host
     display: flex
-    justify-content: center
+    justify-content: flex-start
 // Animations
 @keyframes changeBlockAnimation
     0%
@@ -183,8 +182,48 @@ main
         transform: translateX(0)
         transform: translateY(-50%)
         opacity: 1
+
 @media screen and ( max-width: 480px )
-    .hoster_book::-webkit-scrollbar-track
-        background: transparent
-    .hoster_book::-webkit-scrollbar-thumb
-        background: transparent  
+    main 
+        .darker_bg
+            padding: 1rem
+            grid-template-rows: 70px 40px 1fr
+        .top_part
+            display: flex
+            flex-direction: column
+            .notActive
+                border-radius: 0px
+                left: 35px
+                top: 50%
+                transform: translateY(-50%)
+                height: 35px
+                border: none
+                width: 0px
+                outline: none
+                transition: .3s all ease
+            .active_search
+                border-radius: 0px
+                width: 80%
+                padding-left: 15px
+                position: absolute
+                background: rgba(255, 255, 255, 0.8)
+                left: 35px
+                transform: translateY(-50%)
+                top: 50%
+                height: 35px
+                border: none
+                outline: none
+                transition: .3s all ease
+    .hoster_book::-webkit-scrollbar
+        width: 5px
+
+@media screen and ( max-height: 480px )
+    main 
+        .darker_bg
+            padding: 1rem
+            display: grid
+            grid-template-rows: 35px 40px 1fr
+    .hoster_book::-webkit-scrollbar
+        width: 5px
+    .hover_title
+        bottom: 0

@@ -22,7 +22,7 @@
         <main>
             <div class="authors_host contrainer-fluid">
                 <div class="row hoster_block">
-                    <app-author (click)="activatedAuthorDesc(author)" *ngFor="let author of authors; let i = index" [index]="index" [author]="author" [ngStyle]="{'background-image': 'url('+ author.url +')'}"></app-author>
+                    <app-author (click)="activatedAuthorDesc(author)" *ngFor="let author of authors | searchAuthor:term" [index]="index" [author]="author" [ngStyle]="{'background-image': 'url('+ author.url +')'}"></app-author>
                 </div>
             </div>     
         </main>

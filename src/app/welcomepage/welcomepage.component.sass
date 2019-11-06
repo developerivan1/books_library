@@ -106,23 +106,28 @@
         background: rgba(255, 255, 255, 0.3)
         transition: .3s all ease
 
+@media screen and ( max-height: 480px )
+    #logo
+        top: 30%
+        animation: logoAnim .7s ease
+
+
+
+
 //Animations
+@keyframes logoAnim 
+    0%
+        opacity: 0
+        top: 0
+    100%
+        opacity: 1
+        top: 30%
 
 @keyframes contBtnAnimation
     0%
         opacity: 0
-        margin-bottom: -100px
     100%
         opacity: 1
-        margin-bottom: 100px
-
-@keyframes logoAnimation 
-    0%
-        opacity: 0 
-        top: 50%
-    100% 
-        opacity: 1 
-        top: 70%
 
 @keyframes logoAnimation 
     0%

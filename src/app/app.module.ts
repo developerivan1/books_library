@@ -22,6 +22,7 @@ import { ActiveTemplateService } from '../services/active-template.service';
 import { AuthorComponent } from './homepage/authors/author/author.component';
 import { AuthorDescriptionComponent } from './homepage/authors/author-description/author-description.component';
 import { FormsForCreateAuthorComponent } from './homepage/authors/forms-for-create-author/forms-for-create-author.component';
+import { SearchAuthorPipe } from './search-author.pipe';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { FormsForCreateAuthorComponent } from './homepage/authors/forms-for-crea
     FromsForCreateBookComponent,
     AuthorComponent,
     AuthorDescriptionComponent,
-    FormsForCreateAuthorComponent
+    FormsForCreateAuthorComponent,
+    SearchAuthorPipe
   ],
   imports: [
     BrowserModule,

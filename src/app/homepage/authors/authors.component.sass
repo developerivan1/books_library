@@ -218,3 +218,34 @@ main
         padding-top: 10px
     .hover_title
         bottom: 0
+
+@media screen and ( max-width: 600px )
+
+    .dark_bg
+        padding: 1.5rem
+        .top_part
+            display: flex
+            flex-direction: column
+            .notActive
+                border-radius: 0px
+                left: 35px
+                top: 50%
+                transform: translateY(-50%)
+                height: 35px
+                border: none
+                width: 0px
+                outline: none
+                transition: .3s all ease
+            .active_search
+                border-radius: 0px
+                width: 80%
+                padding-left: 15px
+                position: absolute
+                background: rgba(255, 255, 255, 0.8)
+                left: 35px
+                transform: translateY(-50%)
+                top: 50%
+                height: 35px
+                border: none
+                outline: none
+                transition: .3s all ease

@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Author } from '../author.model';
 import { BooksService } from '../../../services/books.service';
 import { ActiveTemplateService } from '../../../services/active-template.service';
+import { SearchAuthorPipe } from 'src/app/search-author.pipe';
 
 @Component({
   selector: 'app-authors',

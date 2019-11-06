@@ -126,4 +126,7 @@ export class FormsForCreateAuthorComponent implements OnInit {
   closeNewBook() {
     this.isActiveNewBook = false;
   }
+  deleteBook(i) {
+    this.books.splice(i, 1);
+  }
 }
