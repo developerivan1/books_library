@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-
+import { FormsModule } from '@angular/forms';
 import { Author } from '../author.model';
 
 import { BooksService } from '../../../services/books.service';
@@ -15,7 +15,7 @@ import { SearchAuthorPipe } from 'src/app/pipes/search-author.pipe';
 
 export class AuthorsComponent implements OnInit, OnDestroy {
 
-  public authors: Author[];
+  @Input() public authors: Author[];
 
   // Selected author
   @Input() author: Author;

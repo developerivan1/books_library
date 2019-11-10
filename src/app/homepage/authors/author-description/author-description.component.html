@@ -52,7 +52,7 @@
     <div class="newBook" *ngIf="isActiveNewBook">
         <h5>New book</h5>
         <div class="input-group mb-3">
-            <input type="text" [(ngModel)]="newBookStr" class="form-control" placeholder="Enter a book title">
+            <input type="text" (keyup.enter)="addBook()" [(ngModel)]="newBookStr" class="form-control" placeholder="Enter a book title">
             <div class="input-group-append">
                 <button (click)="addBook()" class="btn btn-outline-secondary btn-light" type="button">Add</button>
             </div>

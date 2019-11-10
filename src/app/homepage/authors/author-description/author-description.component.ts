@@ -13,6 +13,7 @@ import { ActiveTemplateService } from '../../../../services/active-template.serv
 
 export class AuthorDescriptionComponent implements OnInit {
 
+  @Input() authors: Author[];
   // Output property for submiting changed author
   @Output() onsubmit = new EventEmitter();
 
@@ -52,6 +53,7 @@ export class AuthorDescriptionComponent implements OnInit {
     this.getFullname();
     this.getFormatDate();
     this.books = this.author.books;
+    console.log(this.author.id);
   }
 
   // Full name of author for template
@@ -122,6 +124,7 @@ export class AuthorDescriptionComponent implements OnInit {
                                   url: this.author.url };
     // Updating author
     this.bookService.updateAuthor(resultAuthor).subscribe();
+    console.log(this.author.id);
     this.activeTemplate.setBoolEditAuthor(false);
   }
 

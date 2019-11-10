@@ -1,6 +1,6 @@
 <div class="cont">
     <div class="darker_bg_for_active_desc" *ngIf="isActiveAuthorDesc">
-        <app-author-description (onsubmit)="onSubmitEdit($event)" [author]="author"></app-author-description>        
+        <app-author-description (onsubmit)="onSubmitEdit($event)" [author]="author" [authors]="authors"></app-author-description>        
     </div>
     <div class="darker_bg_for_active_desc" *ngIf="isActiveCreateAuthor">
         <app-forms-for-create-author (onsubmit)="onSubmitAuthor($event)"></app-forms-for-create-author>
