@@ -8,7 +8,7 @@
                 </label>
                 <br>
                 <input  class="form-control" 
-                        [(ngModel)]="arrayBookForChanging.title" 
+                        [(ngModel)]="bookForChanging.title" 
                         name="title" type="text" id="title" 
                         placeholder="Enter a new title"
                         autocomplete="off">
@@ -20,7 +20,7 @@
                 <br>
                 <input class="form-control" 
                        name="numberOfPages"
-                       [(ngModel)]="arrayBookForChanging.numberOfPages" 
+                       [(ngModel)]="bookForChanging.numberOfPages" 
                        type="text" 
                        id="numberOfPages" 
                        placeholder="Enter a new number of pages"
@@ -32,7 +32,7 @@
                 <label for="gener">Gener</label>
                 <br>
                 <select class="form-control" 
-                        [(ngModel)]="arrayBookForChanging.gener" 
+                        [(ngModel)]="currentGenre" 
                         name="gener">
                     <option *ngFor="let g of geners">{{ g.gener }}</option>
                 </select>
@@ -41,7 +41,7 @@
         <div class="submit_block">
             <div class="submit_block form_group">
                 <button class="btn btn-dark" 
-                        (click)="onSubmitChangesEvent(arrayBook)" 
+                        (click)="onSubmitChangesEvent(book)" 
                         type="button">Submit</button>
             </div>
         </div>

@@ -1,11 +1,13 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Author } from '../homepage/author.model';
 
 @Pipe({
   name: 'searchAuthor'
 })
 export class SearchAuthorPipe implements PipeTransform {
 
-  transform(authors: any, term: any): any {
+  transform(authors: Author[], term: string): Author[] {
+
     // Check if search term is undefined
     if (term === undefined) {
       return authors;
@@ -16,5 +18,4 @@ export class SearchAuthorPipe implements PipeTransform {
         return  item.surename.toLowerCase().includes(term.toLowerCase()) || item.name.toLowerCase().includes(term.toLowerCase());
     });
   }
-
 }

@@ -5,21 +5,23 @@ import { WelcomepageComponent } from './welcomepage/welcomepage.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { BooksComponent } from './homepage/books/books.component';
 import { AuthorsComponent } from './homepage/authors/authors.component';
+import { StatisticComponent } from './homepage/statistic/statistic.component';
 
 const homepageChildRoutes: Routes = [
-  {path: 'books', component: BooksComponent},
-  {path: 'authors', component: AuthorsComponent}
+  { path: 'books', component: BooksComponent },
+  { path: 'statistic', component: StatisticComponent },
+  { path: 'authors', component: AuthorsComponent }
 ];
 
 const appRoutes: Routes = [
-  {path: 'welcomepage', component: WelcomepageComponent},
-  {path: 'homepage', component: HomepageComponent, children: homepageChildRoutes},
-  {path: '', redirectTo: '/welcomepage', pathMatch: 'full'}
+  { path: 'welcomepage', component: WelcomepageComponent },
+  { path: 'homepage', component: HomepageComponent, children: homepageChildRoutes },
+  { path: '', redirectTo: '/welcomepage', pathMatch: 'full' }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(appRoutes)],
-  exports: [RouterModule]
+  imports: [ RouterModule.forRoot(appRoutes) ],
+  exports: [ RouterModule ]
 })
 
 export class AppRoutingModule { }

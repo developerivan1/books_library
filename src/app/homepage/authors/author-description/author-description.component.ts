@@ -1,36 +1,50 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+
 import { Author } from '../../author.model';
+
 import { BooksService } from '../../../../services/books.service';
 import { ActiveTemplateService } from '../../../../services/active-template.service';
+
 @Component({
   selector: 'app-author-description',
   templateUrl: './author-description.component.html',
   styleUrls: ['./author-description.component.sass']
 })
+
 export class AuthorDescriptionComponent implements OnInit {
+
+  // Output property for submiting changed author
   @Output() onsubmit = new EventEmitter();
 
   @Input() author: Author;
 
+  // Updated author
   public updatedAuthor: Author;
+
+  // Properties for presentation in template
   public fullName: string;
   public date: string;
   public books: string[];
+
+  // Component condition (Two states: Author description / Author data changes)
   public editAuthor = false;
   public descAuthor = true;
+
+  // Block for adding new book (condition)
   public isActiveNewBook = false;
   public newBookStr: string;
+
+  // Array of all months
   public monthNames = [ 'January', 'February', 'March', 'April', 'May', 'June',
                         'July', 'August', 'September', 'October', 'November', 'December'];
 
+  // Invalid fields alert status
   public dateEmpty = false;
+  public invalidName = false;
+  public invalidSurename = false;
+  public invalidDate = false;
+  public invalid = false;
 
-  invalidName = false;
-  invalidSurename = false;
-  invalidDate = false;
-  invalid = false;
-
-  public isActiveThisComponent: boolean;
   constructor(private bookService: BooksService,
               private activeTemplate: ActiveTemplateService) { }
 
@@ -40,7 +54,9 @@ export class AuthorDescriptionComponent implements OnInit {
     this.books = this.author.books;
   }
 
+  // Full name of author for template
   getFullname() {
+    // Patronymic check
     if (!this.author.patronymic) {
       this.fullName = `${this.author.name} ${this.author.surename}`;
     } else {
@@ -48,6 +64,7 @@ export class AuthorDescriptionComponent implements OnInit {
     }
   }
 
+  // Convert date to display in template
   getFormatDate() {
     const date = new Date(this.author.birth);
     const day = date.getDate();
@@ -56,7 +73,8 @@ export class AuthorDescriptionComponent implements OnInit {
     this.date = `${day} ${month} ${year}`;
   }
 
-  deleteBook(index) {
+  // Removing a book by index from the author’s book list
+  deleteBook(index: number) {
     this.books.splice(index, 1);
   }
 
@@ -64,6 +82,7 @@ export class AuthorDescriptionComponent implements OnInit {
     this.activeTemplate.setBoolEditAuthor(false);
   }
 
+  // Component state change
   toggleEdit() {
     this.editAuthor = !this.editAuthor;
     this.descAuthor = !this.descAuthor;
@@ -77,6 +96,7 @@ export class AuthorDescriptionComponent implements OnInit {
     this.isActiveNewBook = false;
   }
 
+  // Adding new book to list of books
   addBook() {
     if (this.newBookStr) {
       this.books.push(this.newBookStr);
@@ -85,13 +105,14 @@ export class AuthorDescriptionComponent implements OnInit {
     }
   }
 
+  // Submiting changed author
   onSubmitEdit() {
+    // Convert string date to format Date
     const date = this.date.split(' ');
     const day = Number(date[0]);
     const month = this.monthNames.indexOf(date[1]);
     const year = Number(date[2]);
     const updatedDate = new Date(year, month, day);
-    console.log(updatedDate);
     const resultAuthor: Author = {id: this.author.id,
                                   name: this.author.name,
                                   patronymic: this.author.patronymic,
@@ -99,10 +120,15 @@ export class AuthorDescriptionComponent implements OnInit {
                                   books: this.books,
                                   birth: new Date(this.date),
                                   url: this.author.url };
+    // Updating author
     this.bookService.updateAuthor(resultAuthor).subscribe();
     this.activeTemplate.setBoolEditAuthor(false);
   }
 
+
+  // Basic validation of input fields
+
+  // Check emty feild - NAME
   checkEmptyName() {
     if (!this.author.name) {
       this.invalidName = true;
@@ -114,6 +140,7 @@ export class AuthorDescriptionComponent implements OnInit {
     }
   }
 
+  // Check emty feild - SURENAME
   checkEmptySurename() {
     if (!this.author.surename) {
       this.invalidSurename = true;
@@ -124,6 +151,7 @@ export class AuthorDescriptionComponent implements OnInit {
     }
   }
 
+  // Date validation
   checkEmptyDate() {
     const dateSplited = this.date.split(' ');
     if (dateSplited.length === 3) {

@@ -1,13 +1,13 @@
 <div class="dark_bg">
     <div class="hover_block">
         <div class="hover_title">
-            <h5>{{arrayBook.title}}</h5>
-            <p>Number of pages: {{arrayBook.numberOfPages}}p</p>
+            <h5>{{book.title}}</h5>
+            <p>Number of pages: {{book.numberOfPages}}p</p>
             <button type="button">Read</button>
         </div>
     </div>
     <div class="hover_top_btn">
-        <button type="button" id="edit" (click)="edit(arrayBook)" ><i class="far fa-edit"></i></button>
-        <button type="button" id="delete" (click)="delete(arrayBook)"><i class="fas fa-times"></i></button>
+        <button type="button" id="edit" (click)="edit(book)" ><i class="far fa-edit"></i></button>
+        <button type="button" id="delete" (click)="delete(book)"><i class="fas fa-times"></i></button>
     </div>
 </div>

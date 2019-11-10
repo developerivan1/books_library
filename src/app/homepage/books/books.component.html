@@ -29,12 +29,12 @@
                       (onsubmitChanges)="onSubmitChangesEvent($event)"
                       (ondelete)="onDeleteEvent($event)"
                       (onedit)="onEditEvent($event)"
-                      [arrayBook]="item"
+                      [book]="item"
                       [ngStyle]="{'background-image': 'url('+item.imageSrc+')'}"></book>
 
             </div>
         </div>
-            <app-forms-for-changing-book [arrayBookForChanging]="arrayBook" (onsubmit)="onSubmitCreateEvent($event)" *ngIf="activeTemplate.isActiveChangeBlock"></app-forms-for-changing-book>
+            <app-forms-for-changing-book [bookForChanging]="book" (onsubmit)="onSubmitCreateEvent($event)" *ngIf="activeTemplate.isActiveChangeBlock"></app-forms-for-changing-book>
 
             <app-froms-for-create-book (onsubmit)="onSubmitBook($event)" *ngIf="isActiveCreateBlock"></app-froms-for-create-book>
 

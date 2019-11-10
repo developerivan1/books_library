@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { ActiveTemplateService } from 'src/services/active-template.service';
 import { BooksService } from 'src/services/books.service';
+
 import { Author } from 'src/app/homepage/author.model';
 
 @Component({
@@ -10,18 +11,32 @@ import { Author } from 'src/app/homepage/author.model';
   templateUrl: './forms-for-create-author.component.html',
   styleUrls: ['./forms-for-create-author.component.sass']
 })
+
 export class FormsForCreateAuthorComponent implements OnInit {
 
+  // Reactive form property
   reactiveFormForCreateAuthor: FormGroup;
+
+  // Two-way binding string for adding new book to a list of books
   @Input() newBookStr: string;
+
+  // Output property for submit new author
   @Output() onsubmit = new EventEmitter();
+
+  // Proeprty for display new book block
   public isActiveNewBook = false;
+
   // Property for files
-  fileData: File = null;
-  previewUrl: any = null;
-  allAuthors: Author[];
-  books: string[] = [];
-  isSubmitBtnDisabled = true;
+  public fileData: File = null;
+  public previewUrl: any = null;
+
+  // List of all authors
+  public allAuthors: Author[];
+
+  // Array of all author books
+  public books: string[] = [];
+
+  public isSubmitBtnDisabled = true;
 
   constructor(private bookService: BooksService,
               private activeTemplate: ActiveTemplateService,
@@ -29,11 +44,14 @@ export class FormsForCreateAuthorComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
+
+    // Getting list of all authors
     this.bookService.getAuthors().subscribe(data => {
       this.allAuthors = data;
     });
   }
 
+  // Reactive form init
   initForm() {
     this.reactiveFormForCreateAuthor = this.fb.group({
       name: ['', [
@@ -53,6 +71,7 @@ export class FormsForCreateAuthorComponent implements OnInit {
      });
     }
 
+  // Validation of all controls
   isControlInvalid(controlName: string): boolean {
     const control = this.reactiveFormForCreateAuthor.controls[controlName];
     const result = control.invalid && control.touched;
@@ -64,15 +83,20 @@ export class FormsForCreateAuthorComponent implements OnInit {
     return result;
   }
 
+  // Submiting new author
   onSubmit() {
     // debugger;
+    // Getting of all controls
     const controls = this.reactiveFormForCreateAuthor.controls;
+    // Invalidation check
     if (this.reactiveFormForCreateAuthor.invalid) {
+      // If control invalid, then mark as touched him
       Object.keys(controls)
       .forEach(controlName => controls[controlName].markAsTouched());
-      console.log('Wooops');
       return;
     }
+
+    // Formation of the author’s object for sending
     const obj: Author = {
       id: this.allAuthors.length + 1,
       name: controls.name.value,
@@ -82,10 +106,10 @@ export class FormsForCreateAuthorComponent implements OnInit {
       books: this.books,
       url: this.previewUrl
     };
+
+    // Sending author object
     this.bookService.createAuthor(obj).subscribe();
     this.closeThisComponent();
-    // this.bookService.createBook().subscribe();
-    // this.closeThisComponent();
     this.onsubmit.emit(obj);
   }
 
@@ -111,6 +135,7 @@ export class FormsForCreateAuthorComponent implements OnInit {
     this.activeTemplate.setBoolCreateAuthor(false);
   }
 
+  // Adding new book to a author list of books
   addBook() {
     if (this.newBookStr !== null || undefined) {
       this.books.push(this.newBookStr);
@@ -120,13 +145,19 @@ export class FormsForCreateAuthorComponent implements OnInit {
       return false;
     }
   }
+  // Opening new book block
   activeNewBook() {
     this.isActiveNewBook = true;
   }
+
+  // Closing new book block
   closeNewBook() {
     this.isActiveNewBook = false;
   }
+
+  // Method for removing book
   deleteBook(i) {
     this.books.splice(i, 1);
   }
+
 }

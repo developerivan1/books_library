@@ -1,6 +1,8 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+
 import { BooksService } from '../../../../services/books.service';
+
 import { Book } from '../../book.model';
 
 @Component({
@@ -8,21 +10,31 @@ import { Book } from '../../book.model';
   templateUrl: './book.component.html',
   styleUrls: ['./book.component.sass']
 })
+
 export class BookComponent {
 
-  @Input() arrayBook: Book;
+  // Input property - current book
+  @Input() book: Book;
+
+  // Output properties
   @Output() ondelete = new EventEmitter<any>();
   @Output() onedit = new EventEmitter<any>();
   @Output() onsubmitChanges = new EventEmitter<any>();
 
   constructor(private bookService: BooksService) { }
-  delete(arrayBook) {
-    this.ondelete.emit(arrayBook);
+
+  // Methods for deleting book
+  delete(book: Book) {
+    this.ondelete.emit(book);
   }
-  edit(arrayBook) {
-    this.onedit.emit(arrayBook);
+
+  // Method for editing book
+  edit(book: Book) {
+    this.onedit.emit(book);
   }
-  submitChanges(arrayBook) {
-    this.onsubmitChanges.emit(arrayBook);
+
+  // Submit changed book
+  submitChanges(book: Book) {
+    this.onsubmitChanges.emit(book);
   }
 }

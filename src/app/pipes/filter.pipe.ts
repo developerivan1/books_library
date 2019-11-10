@@ -1,11 +1,13 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Book } from '../homepage/book.model';
 
 @Pipe({
   name: 'filter'
 })
 export class FilterPipe implements PipeTransform {
 
-  transform(array_of_books: any, selectedGener: any): any {
+  transform(array_of_books: Book[], selectedGener: string): Book[] {
+
     if (selectedGener === 'All books') {
       return array_of_books;
     }
@@ -13,5 +15,4 @@ export class FilterPipe implements PipeTransform {
       return item.gener.includes(selectedGener);
     });
   }
-
 }

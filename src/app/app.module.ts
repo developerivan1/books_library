@@ -14,15 +14,16 @@ import { BooksComponent } from './homepage/books/books.component';
 import { BooksService } from '../services/books.service';
 import { AuthorsComponent } from './homepage/authors/authors.component';
 import { BookComponent } from './homepage/books/book/book.component';
-import { SearchPipe } from './search.pipe';
-import { FilterPipe } from './filter.pipe';
+import { SearchPipe } from './pipes/search.pipe';
+import { FilterPipe } from './pipes/filter.pipe';
 import { FormsForChangingBookComponent } from './homepage/books/forms-for-changing-book/forms-for-changing-book.component';
 import { FromsForCreateBookComponent } from './homepage/books/froms-for-create-book/froms-for-create-book.component';
 import { ActiveTemplateService } from '../services/active-template.service';
 import { AuthorComponent } from './homepage/authors/author/author.component';
 import { AuthorDescriptionComponent } from './homepage/authors/author-description/author-description.component';
 import { FormsForCreateAuthorComponent } from './homepage/authors/forms-for-create-author/forms-for-create-author.component';
-import { SearchAuthorPipe } from './search-author.pipe';
+import { SearchAuthorPipe } from './pipes/search-author.pipe';
+import { StatisticComponent } from './homepage/statistic/statistic.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { SearchAuthorPipe } from './search-author.pipe';
     AuthorComponent,
     AuthorDescriptionComponent,
     FormsForCreateAuthorComponent,
-    SearchAuthorPipe
+    SearchAuthorPipe,
+    StatisticComponent
   ],
   imports: [
     BrowserModule,
