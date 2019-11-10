@@ -32,7 +32,7 @@
                 <label for="gener">Gener</label>
                 <br>
                 <select class="form-control" 
-                        [(ngModel)]="currentGenre" 
+                        [(ngModel)]="bookForChanging.gener" 
                         name="gener">
                     <option *ngFor="let g of geners">{{ g.gener }}</option>
                 </select>

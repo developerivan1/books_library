@@ -15,20 +15,17 @@ export class FormsForChangingBookComponent implements OnInit {
   // Current book for changing
   @Input() bookForChanging: Book;
 
-  @Input() currentGenre: string;
-  // Change block status 
+  // Change block status
   @Input() isActiveChangeBlock: boolean;
 
   // List of all geners
-  public geners: string[] = [];
+  @Input() public geners: string[] = [];
 
   constructor(private bookService: BooksService,
-              private activeTemplate: ActiveTemplateService) { }
+              private activeTemplate: ActiveTemplateService) { 
+              }
 
   ngOnInit() {
-    this.getGeners();
-
-    setTimeout(this.currentGenre = this.bookForChanging.gener, 1000);
   }
 
   // Method for submiting changed book
@@ -40,10 +37,5 @@ export class FormsForChangingBookComponent implements OnInit {
   // Closing Edit block component
   closeEditBlock() {
     this.activeTemplate.isActiveChangeBlock = false;
-  }
-
-  // Getting list of all geners
-  getGeners() {
-    this.bookService.getGeners().subscribe(data => this.geners = data);
   }
 }

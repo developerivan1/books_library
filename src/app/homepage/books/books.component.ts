@@ -32,7 +32,7 @@ export class BooksComponent implements OnInit {
   @Input() array_of_books: Book[] = [];
 
   // List of geners
-  public geners = [];
+  @Input() public geners = [];
   // Selected gener detection
   public selectedGener;
 
